@@ -1,0 +1,281 @@
+<!DOCTYPE html>
+<html lang="id">
+<head>
+  <meta charset="UTF-8" />
+  <meta name="viewport" content="width=device-width, initial-scale=1.0" />
+  <title>Contact — Diazka</title>
+  <link rel="icon" href="data:image/svg+xml,<svg xmlns='http://www.w3.org/2000/svg' viewBox='0 0 100 100'><rect width='100' height='100' rx='20' fill='%233b82f6'/><text y='72' x='50' text-anchor='middle' font-size='65' font-family='sans-serif' font-weight='bold' fill='white'>D</text></svg>">
+  <!-- Open Graph -->
+  <meta property="og:title" content="Contact — Raden Diazka Adhitya Budiman" />
+  <meta property="og:description" content="Ada pertanyaan atau mau berkolaborasi? Hubungi saya di sini." />
+  <meta property="og:type" content="website" />
+  <meta property="og:image" content="assets/foto.png" />
+  <link rel="stylesheet" href="css/style.css" />
+  <style>
+    .contact-grid {
+      display: grid;
+      grid-template-columns: 1fr 1.4fr;
+      gap: 2rem;
+      align-items: start;
+    }
+
+    .contact-info { display: flex; flex-direction: column; gap: 1rem; }
+
+    .contact-item {
+      background: var(--surface);
+      border: 1px solid var(--border);
+      border-radius: var(--radius);
+      padding: 1.25rem 1.5rem;
+      display: flex;
+      align-items: center;
+      gap: 1rem;
+      transition: border-color var(--transition), transform var(--transition);
+    }
+
+    .contact-item:hover { border-color: var(--accent); transform: translateX(4px); }
+
+    .contact-icon  { font-size: 1.5rem; flex-shrink: 0; }
+    .contact-label {
+      font-size: 0.75rem;
+      color: var(--text-muted);
+      text-transform: uppercase;
+      letter-spacing: 0.08em;
+      font-family: 'Syne', sans-serif;
+    }
+
+    .contact-value { font-size: 0.9rem; color: var(--text-main); font-weight: 500; word-break: break-all; }
+
+    /* Form */
+    .contact-form {
+      background: var(--surface);
+      border: 1px solid var(--border);
+      border-radius: var(--radius);
+      padding: 2rem;
+    }
+
+    .form-group { margin-bottom: 1.25rem; }
+
+    .form-group label {
+      display: block;
+      font-size: 0.82rem;
+      font-weight: 500;
+      color: var(--text-muted);
+      margin-bottom: 0.5rem;
+      text-transform: uppercase;
+      letter-spacing: 0.05em;
+      font-family: 'Syne', sans-serif;
+    }
+
+    .form-group input,
+    .form-group textarea {
+      width: 100%;
+      background: var(--bg);
+      border: 1px solid var(--border);
+      border-radius: 8px;
+      padding: 0.75rem 1rem;
+      color: var(--text-main);
+      font-family: 'DM Sans', sans-serif;
+      font-size: 0.9rem;
+      transition: border-color var(--transition), box-shadow var(--transition);
+      outline: none;
+      resize: vertical;
+    }
+
+    .form-group input:focus,
+    .form-group textarea:focus {
+      border-color: var(--accent);
+      box-shadow: 0 0 0 3px rgba(59,130,246,0.15);
+    }
+
+    .form-group textarea { min-height: 120px; }
+
+    #form-feedback {
+      margin-top: 1rem;
+      font-size: 0.85rem;
+      display: none;
+      padding: 0.6rem 1rem;
+      border-radius: 8px;
+      border: 1px solid transparent;
+    }
+
+    #form-feedback.success {
+      color: #4ade80;
+      background: rgba(74,222,128,0.08);
+      border-color: rgba(74,222,128,0.25);
+    }
+
+    #form-feedback.error {
+      color: #f87171;
+      background: rgba(248,113,113,0.08);
+      border-color: rgba(248,113,113,0.25);
+    }
+
+    @media (max-width: 640px) { .contact-grid { grid-template-columns: 1fr; } }
+  </style>
+</head>
+<body>
+
+  <nav class="navbar">
+    <a href="index.html" class="logo">DI<span>.</span></a>
+    <button class="hamburger" aria-label="Menu">
+      <span></span><span></span><span></span>
+    </button>
+    <div class="navbar-right">
+      <ul class="nav-links">
+        <li><a href="index.html">Home</a></li>
+        <li><a href="about.html">About</a></li>
+        <li><a href="portfolio.html">Portfolio</a></li>
+        <li><a href="certificates.html">Certificates</a></li>
+        <li><a href="contact.html">Contact</a></li>
+      </ul>
+      <button class="theme-toggle" id="theme-toggle" title="Toggle tema">☀️</button>
+    </div>
+  </nav>
+
+  <main>
+    <section class="section">
+
+      <span class="tag reveal">Contact</span>
+      <h1 class="section-title reveal reveal-d1" style="margin-top:1rem;">Hubungi Saya</h1>
+      <p class="section-sub reveal reveal-d2">
+        Ada pertanyaan atau mau berkolaborasi? Jangan ragu untuk menghubungi saya.
+      </p>
+
+      <div class="contact-grid">
+
+        <!-- Info kontak -->
+        <div class="contact-info">
+
+          <div class="contact-item reveal reveal-d1">
+            <div class="contact-icon">📧</div>
+            <div>
+              <div class="contact-label">Email</div>
+              <!-- ✏️ EDIT: Ganti dengan email kamu -->
+              <div class="contact-value">
+                <a href="mailto:diazka.adhitya.budiman@gmail.com">diazka.adhitya.budiman@gmail.com</a>
+              </div>
+            </div>
+          </div>
+
+          <div class="contact-item reveal reveal-d2">
+            <div class="contact-icon">🐙</div>
+            <div>
+              <div class="contact-label">GitHub</div>
+              <!-- ✏️ EDIT: Ganti username GitHub -->
+              <div class="contact-value">
+                <a href="https://github.com/raden-diazka" target="_blank">github.com/raden-diazka</a>
+              </div>
+            </div>
+          </div>
+
+          <div class="contact-item reveal reveal-d3">
+            <div class="contact-icon">📝</div>
+            <div>
+              <div class="contact-label">Blog</div>
+              <!-- ✏️ EDIT: Ganti URL Blogger -->
+              <div class="contact-value">
+                <a href="https://diazkaa.blogspot.com/" target="_blank">diazkaa.blogspot.com</a>
+              </div>
+            </div>
+          </div>
+
+        </div>
+
+        <!-- Form -->
+        <div class="contact-form reveal reveal-d2">
+          <h3 style="margin-bottom:1.5rem; font-size:1rem;">Kirim Pesan</h3>
+
+          <div class="form-group">
+            <label for="name">Nama</label>
+            <input type="text" id="name" placeholder="Nama kamu" />
+          </div>
+
+          <div class="form-group">
+            <label for="email">Email</label>
+            <input type="email" id="email" placeholder="email@contoh.com" />
+          </div>
+
+          <div class="form-group">
+            <label for="message">Pesan</label>
+            <textarea id="message" placeholder="Tuliskan pesanmu di sini..."></textarea>
+          </div>
+
+          <button class="btn btn-primary" id="send-btn" style="width:100%; justify-content:center;">
+            Kirim Pesan →
+          </button>
+
+          <div id="form-feedback"></div>
+        </div>
+
+      </div>
+
+    </section>
+  </main>
+
+  <footer>
+    <p>© 2025 Raden Diazka Adhitya Budiman. Dibuat dengan HTML, CSS & JS.</p>
+  </footer>
+
+  <script src="js/main.js"></script>
+  <script>
+    const sendBtn  = document.getElementById('send-btn');
+    const feedback = document.getElementById('form-feedback');
+
+    sendBtn.addEventListener('click', async () => {
+      const name    = document.getElementById('name').value.trim();
+      const email   = document.getElementById('email').value.trim();
+      const message = document.getElementById('message').value.trim();
+
+      feedback.className = '';
+      feedback.style.display = 'none';
+
+      // Validasi kosong
+      if (!name || !email || !message) {
+        feedback.textContent = '⚠️ Harap isi semua kolom terlebih dahulu.';
+        feedback.classList.add('error');
+        feedback.style.display = 'block';
+        return;
+      }
+
+      // Validasi format email
+      const emailRegex = /^[^\s@]+@[^\s@]+\.[^\s@]+$/;
+      if (!emailRegex.test(email)) {
+        feedback.textContent = '⚠️ Format email tidak valid.';
+        feedback.classList.add('error');
+        feedback.style.display = 'block';
+        return;
+      }
+
+      // Kirim ke Formspree
+      sendBtn.textContent = 'Mengirim...';
+      sendBtn.disabled = true;
+
+      try {
+        const res = await fetch('https://formspree.io/f/xgorwzjv', {
+          method:  'POST',
+          headers: { 'Content-Type': 'application/json', 'Accept': 'application/json' },
+          body:    JSON.stringify({ name, email, message })
+        });
+
+        if (res.ok) {
+          feedback.textContent = '✅ Pesan berhasil dikirim! Saya akan membalas secepatnya.';
+          feedback.classList.add('success');
+          document.getElementById('name').value    = '';
+          document.getElementById('email').value   = '';
+          document.getElementById('message').value = '';
+        } else {
+          feedback.textContent = '❌ Gagal mengirim pesan. Silakan coba lagi.';
+          feedback.classList.add('error');
+        }
+      } catch {
+        feedback.textContent = '❌ Tidak ada koneksi internet. Silakan coba lagi.';
+        feedback.classList.add('error');
+      }
+
+      feedback.style.display = 'block';
+      sendBtn.textContent = 'Kirim Pesan →';
+      sendBtn.disabled = false;
+    });
+  </script>
+</body>
+</html>

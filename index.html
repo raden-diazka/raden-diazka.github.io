@@ -1,0 +1,271 @@
+<!DOCTYPE html>
+<html lang="id">
+<head>
+  <meta charset="UTF-8" />
+  <meta name="viewport" content="width=device-width, initial-scale=1.0" />
+  <title>Diazka — TJKT Student</title>
+  <link rel="icon" href="data:image/svg+xml,<svg xmlns='http://www.w3.org/2000/svg' viewBox='0 0 100 100'><rect width='100' height='100' rx='20' fill='%233b82f6'/><text y='72' x='50' text-anchor='middle' font-size='65' font-family='sans-serif' font-weight='bold' fill='white'>D</text></svg>">
+  <!-- Open Graph -->
+  <meta property="og:title" content="Raden Diazka Adhitya Budiman — TJKT Student" />
+  <meta property="og:description" content="Siswa TJKT yang tertarik di bidang networking, konfigurasi jaringan, dan keamanan komputer." />
+  <meta property="og:type" content="website" />
+  <meta property="og:image" content="assets/foto.png" />
+  <link rel="stylesheet" href="css/style.css" />
+  <style>
+    #particle-canvas {
+      position: absolute;
+      inset: 0;
+      width: 100%;
+      height: 100%;
+      z-index: 0;
+      display: block;
+    }
+
+    .hero {
+      position: relative;
+      min-height: calc(100vh - 64px);
+      display: flex;
+      align-items: center;
+      padding: 4rem 2rem;
+      max-width: 900px;
+      margin: 0 auto;
+      gap: 4rem;
+      z-index: 1;
+    }
+
+    .hero-wrapper {
+      position: relative;
+      overflow: hidden;
+      background: var(--bg);
+    }
+
+    .hero-wrapper::after {
+      content: '';
+      position: absolute;
+      bottom: 0; left: 0; right: 0;
+      height: 120px;
+      background: linear-gradient(to bottom, transparent, var(--bg));
+      z-index: 1;
+      pointer-events: none;
+    }
+
+    .hero-text { flex: 1; }
+
+    .hero-greeting {
+      color: var(--accent);
+      font-size: 0.9rem;
+      font-weight: 500;
+      letter-spacing: 0.1em;
+      text-transform: uppercase;
+      margin-bottom: 1rem;
+      font-family: 'Syne', sans-serif;
+      opacity: 0;
+      animation: fadeUp 0.6s ease forwards 0.1s;
+    }
+
+    .hero-name {
+      font-size: clamp(2.2rem, 6vw, 3.5rem);
+      margin-bottom: 0.5rem;
+      letter-spacing: -0.03em;
+      opacity: 0;
+      animation: fadeUp 0.6s ease forwards 0.25s;
+    }
+
+    .hero-name span { color: var(--accent); }
+
+    .hero-typed-wrap {
+      font-size: 1rem;
+      color: var(--text-muted);
+      margin-bottom: 1.25rem;
+      min-height: 1.6rem;
+      opacity: 0;
+      animation: fadeUp 0.6s ease forwards 0.38s;
+    }
+
+    .hero-typed-wrap .typed-cursor { color: var(--accent); }
+
+    .hero-desc {
+      color: var(--text-muted);
+      font-size: 1rem;
+      max-width: 480px;
+      margin-bottom: 2rem;
+      line-height: 1.8;
+      opacity: 0;
+      animation: fadeUp 0.6s ease forwards 0.45s;
+    }
+
+    .hero-cta {
+      display: flex;
+      gap: 1rem;
+      flex-wrap: wrap;
+      opacity: 0;
+      animation: fadeUp 0.6s ease forwards 0.55s;
+    }
+
+    .hero-image {
+      flex-shrink: 0;
+      opacity: 0;
+      animation: fadeUp 0.6s ease forwards 0.3s;
+    }
+
+    .avatar-wrapper {
+      width: 210px;
+      height: 210px;
+      border-radius: 50%;
+      border: 2.5px solid var(--accent);
+      overflow: hidden;
+      background: var(--surface);
+      display: flex;
+      align-items: center;
+      justify-content: center;
+      box-shadow: 0 0 40px rgba(59,130,246,0.25);
+      animation: glowPulse 3s ease-in-out infinite 1s;
+    }
+
+    .avatar-wrapper img {
+      width: 100%;
+      height: 100%;
+      object-fit: cover;
+      object-position: center top;
+    }
+
+    .hero-stats {
+      display: flex;
+      gap: 2rem;
+      margin-top: 2.5rem;
+      flex-wrap: wrap;
+      opacity: 0;
+      animation: fadeUp 0.6s ease forwards 0.7s;
+    }
+
+    .stat-item { text-align: left; }
+
+    .stat-num {
+      font-family: 'Syne', sans-serif;
+      font-size: 1.4rem;
+      font-weight: 700;
+      color: var(--white);
+    }
+
+    .stat-label { font-size: 0.78rem; color: var(--text-muted); margin-top: 0.1rem; }
+
+    .hero-divider {
+      height: 1px;
+      background: linear-gradient(to right, transparent, var(--border), transparent);
+      margin: 0 2rem;
+    }
+
+    @keyframes fadeUp {
+      from { opacity: 0; transform: translateY(20px); }
+      to   { opacity: 1; transform: translateY(0); }
+    }
+
+    @keyframes glowPulse {
+      0%, 100% { box-shadow: 0 0 30px rgba(59,130,246,0.2); }
+      50%       { box-shadow: 0 0 55px rgba(59,130,246,0.45); }
+    }
+
+    @media (max-width: 640px) {
+      .hero { flex-direction: column-reverse; gap: 2rem; padding-top: 3rem; min-height: auto; }
+      .avatar-wrapper { width: 150px; height: 150px; }
+    }
+  </style>
+</head>
+<body>
+
+  <nav class="navbar">
+    <a href="index.html" class="logo">DI<span>.</span></a>
+    <button class="hamburger" aria-label="Menu">
+      <span></span><span></span><span></span>
+    </button>
+    <div class="navbar-right">
+      <ul class="nav-links">
+        <li><a href="index.html">Home</a></li>
+        <li><a href="about.html">About</a></li>
+        <li><a href="portfolio.html">Portfolio</a></li>
+        <li><a href="certificates.html">Certificates</a></li>
+        <li><a href="contact.html">Contact</a></li>
+      </ul>
+      <button class="theme-toggle" id="theme-toggle" title="Toggle tema">☀️</button>
+    </div>
+  </nav>
+
+  <div class="hero-wrapper">
+    <canvas id="particle-canvas"></canvas>
+    <main>
+      <section class="hero">
+
+        <div class="hero-text">
+          <p class="hero-greeting">👋 Halo, saya</p>
+
+          <h1 class="hero-name">Raden Diazka<br><span>Adhitya Budiman</span></h1>
+
+          <div class="hero-typed-wrap">
+            <span id="typed-output"></span>
+          </div>
+
+          <p class="hero-desc">
+            Siswa <strong>Teknik Jaringan Komputer dan Telekomunikasi (TJKT)</strong>
+            yang tertarik di bidang networking, konfigurasi jaringan, dan keamanan komputer.
+          </p>
+
+          <div class="hero-cta">
+            <a href="portfolio.html" class="btn btn-primary">Lihat Portfolio →</a>
+            <a href="contact.html" class="btn btn-outline">Hubungi Saya</a>
+          </div>
+
+          <!-- Stats Opsi A -->
+          <div class="hero-stats">
+            <div class="stat-item">
+              <div class="stat-num">2023</div>
+              <div class="stat-label">Mulai Belajar IT</div>
+            </div>
+            <div class="stat-item">
+              <div class="stat-num">TJKT</div>
+              <div class="stat-label">Jurusan</div>
+            </div>
+            <div class="stat-item">
+              <div class="stat-num">Bandung</div>
+              <div class="stat-label">Lokasi</div>
+            </div>
+          </div>
+        </div>
+
+        <!-- Foto profil -->
+        <div class="hero-image">
+          <div class="avatar-wrapper">
+            <img src="assets/foto.png" alt="Foto Raden Diazka Adhitya Budiman">
+          </div>
+        </div>
+
+      </section>
+    </main>
+  </div>
+
+  <div class="hero-divider"></div>
+
+  <footer>
+    <p>© 2025 Raden Diazka Adhitya Budiman. Dibuat dengan HTML, CSS & JS.</p>
+  </footer>
+
+  <script src="https://cdnjs.cloudflare.com/ajax/libs/typed.js/2.0.16/typed.umd.js"></script>
+  <script>
+    new Typed('#typed-output', {
+      strings: [
+        'Siswa TJKT.',
+        'Network Enthusiast.',
+        'Cisco Packet Tracer User.',
+        'Future Network Engineer.'
+      ],
+      typeSpeed:  55,
+      backSpeed:  30,
+      backDelay: 1800,
+      loop:      true,
+      cursorChar: '|',
+    });
+  </script>
+
+  <script src="js/main.js"></script>
+  <script src="js/particles.js"></script>
+</body>
+</html>

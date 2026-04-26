@@ -1,0 +1,378 @@
+<!DOCTYPE html>
+<html lang="id">
+<head>
+  <meta charset="UTF-8" />
+  <meta name="viewport" content="width=device-width, initial-scale=1.0" />
+  <title>Certificates — Diazka</title>
+  <link rel="icon" href="data:image/svg+xml,<svg xmlns='http://www.w3.org/2000/svg' viewBox='0 0 100 100'><rect width='100' height='100' rx='20' fill='%233b82f6'/><text y='72' x='50' text-anchor='middle' font-size='65' font-family='sans-serif' font-weight='bold' fill='white'>D</text></svg>">
+  <!-- Open Graph -->
+  <meta property="og:title" content="Certificates — Raden Diazka Adhitya Budiman" />
+  <meta property="og:description" content="Sertifikat dan pencapaian yang saya raih selama belajar di bidang jaringan komputer." />
+  <meta property="og:type" content="website" />
+  <meta property="og:image" content="assets/foto.png" />
+  <link rel="stylesheet" href="css/style.css" />
+  <style>
+    .cert-grid {
+      display: grid;
+      grid-template-columns: repeat(auto-fill, minmax(280px, 1fr));
+      gap: 1.25rem;
+      margin-bottom: 3rem;
+    }
+
+    .cert-card {
+      background: var(--surface);
+      border: 1px solid var(--border);
+      border-radius: var(--radius);
+      padding: 1.5rem;
+      display: flex;
+      flex-direction: column;
+      gap: 0.75rem;
+      transition: border-color var(--transition), transform var(--transition), box-shadow var(--transition);
+      position: relative;
+      overflow: hidden;
+    }
+
+    .cert-card::before {
+      content: '';
+      position: absolute;
+      inset: 0;
+      background: radial-gradient(circle at var(--mx,50%) var(--my,50%), rgba(59,130,246,0.07), transparent 65%);
+      opacity: 0;
+      transition: opacity 0.3s ease;
+      pointer-events: none;
+    }
+
+    .cert-card:hover::before { opacity: 1; }
+    .cert-card:hover {
+      border-color: var(--accent);
+      transform: translateY(-4px);
+      box-shadow: 0 12px 32px rgba(0,0,0,0.15);
+    }
+
+    .cert-issuer-badge {
+      display: flex;
+      align-items: center;
+      gap: 0.5rem;
+    }
+
+    .cert-issuer-icon {
+      font-size: 1.5rem;
+      flex-shrink: 0;
+    }
+
+    .cert-issuer-name {
+      font-size: 0.75rem;
+      color: var(--accent);
+      font-weight: 600;
+      font-family: 'Syne', sans-serif;
+      letter-spacing: 0.05em;
+      text-transform: uppercase;
+    }
+
+    .cert-title {
+      font-family: 'Syne', sans-serif;
+      font-size: 1rem;
+      font-weight: 700;
+      color: var(--text-main);
+      line-height: 1.3;
+    }
+
+    .cert-meta {
+      display: flex;
+      align-items: center;
+      gap: 1rem;
+      flex-wrap: wrap;
+    }
+
+    .cert-date {
+      font-size: 0.78rem;
+      color: var(--text-muted);
+      display: flex;
+      align-items: center;
+      gap: 0.3rem;
+    }
+
+    .cert-validity {
+      font-size: 0.72rem;
+      background: #1a3d2e;
+      color: #4ade80;
+      padding: 2px 8px;
+      border-radius: 4px;
+      font-weight: 500;
+    }
+
+    .cert-footer {
+      margin-top: auto;
+      padding-top: 0.75rem;
+      border-top: 1px solid var(--border);
+      display: flex;
+      justify-content: space-between;
+      align-items: center;
+    }
+
+    .cert-verify-link {
+      font-size: 0.78rem;
+      color: var(--accent);
+      display: flex;
+      align-items: center;
+      gap: 0.3rem;
+      transition: color var(--transition);
+    }
+
+    .cert-verify-link:hover { color: var(--white); }
+
+    .cert-no-verify {
+      font-size: 0.75rem;
+      color: var(--text-muted);
+    }
+
+    .cert-id-chip {
+      display: inline-flex;
+      align-items: center;
+      gap: 0.4rem;
+      background: var(--surface);
+      border: 1px solid var(--border);
+      border-radius: 4px;
+      padding: 0.28rem 0.6rem;
+      font-size: 0.72rem;
+      font-family: "Courier New", monospace;
+      color: var(--text-muted);
+      cursor: pointer;
+      transition: border-color var(--transition), color var(--transition);
+      user-select: none;
+      margin-bottom: 0.5rem;
+      width: 100%;
+      justify-content: space-between;
+    }
+
+    .cert-id-chip:hover {
+      border-color: var(--accent);
+      color: var(--white);
+    }
+
+    .cert-id-chip .cert-id-label {
+      font-size: 0.65rem;
+      text-transform: uppercase;
+      letter-spacing: 0.05em;
+      color: var(--accent);
+      font-family: var(--font-body);
+      font-weight: 600;
+    }
+
+    .cert-id-chip .cert-id-copied {
+      font-size: 0.65rem;
+      color: #4ade80;
+      display: none;
+    }
+
+    /* Stats bar atas */
+    .cert-stats {
+      display: flex;
+      gap: 1.5rem;
+      margin-bottom: 3rem;
+      flex-wrap: wrap;
+    }
+
+    .cert-stat {
+      background: var(--surface);
+      border: 1px solid var(--border);
+      border-radius: var(--radius);
+      padding: 1.25rem 1.5rem;
+      flex: 1;
+      min-width: 140px;
+      text-align: center;
+    }
+
+    .cert-stat-num {
+      font-family: 'Syne', sans-serif;
+      font-size: 1.75rem;
+      font-weight: 700;
+      color: var(--accent);
+    }
+
+    .cert-stat-label {
+      font-size: 0.78rem;
+      color: var(--text-muted);
+      margin-top: 0.2rem;
+    }
+
+    @media (max-width: 640px) {
+      .cert-stats { gap: 0.75rem; }
+      .cert-stat { padding: 1rem; }
+    }
+  </style>
+</head>
+<body>
+
+  <nav class="navbar">
+    <a href="index.html" class="logo">DI<span>.</span></a>
+    <button class="hamburger" aria-label="Menu">
+      <span></span><span></span><span></span>
+    </button>
+    <div class="navbar-right">
+      <ul class="nav-links">
+        <li><a href="index.html">Home</a></li>
+        <li><a href="about.html">About</a></li>
+        <li><a href="portfolio.html">Portfolio</a></li>
+        <li><a href="certificates.html">Certificates</a></li>
+        <li><a href="contact.html">Contact</a></li>
+      </ul>
+      <button class="theme-toggle" id="theme-toggle" title="Toggle tema">☀️</button>
+    </div>
+  </nav>
+
+  <main>
+    <section class="section">
+
+      <span class="tag reveal">Certificates</span>
+      <h1 class="section-title reveal reveal-d1" style="margin-top:1rem;">Sertifikasi</h1>
+      <p class="section-sub reveal reveal-d2">
+        Sertifikat yang telah saya raih dari berbagai platform dan lembaga resmi.
+      </p>
+
+      <!-- Stats -->
+      <div class="cert-stats reveal">
+        <div class="cert-stat">
+          <div class="cert-stat-num">5</div>
+          <div class="cert-stat-label">Total Sertifikat</div>
+        </div>
+        <div class="cert-stat">
+          <div class="cert-stat-num">3</div>
+          <div class="cert-stat-label">Dari Cisco NetAcad</div>
+        </div>
+        <div class="cert-stat">
+          <div class="cert-stat-num">2025</div>
+          <div class="cert-stat-label">Tahun Terbaru</div>
+        </div>
+      </div>
+
+      <!-- Certificate Cards -->
+      <div class="cert-grid">
+
+        <!-- 1. Cisco — Networking Basics -->
+        <div class="cert-card reveal reveal-d1">
+          <div class="cert-issuer-badge">
+            <div class="cert-issuer-icon">🌐</div>
+            <div class="cert-issuer-name">Cisco Networking Academy</div>
+          </div>
+          <div class="cert-title">Networking Basics</div>
+          <div class="cert-meta">
+            <span class="cert-date">📅 12 Jun 2025</span>
+            <span class="cert-validity">Valid</span>
+          </div>
+          <div class="cert-footer">
+            <a href="https://www.credly.com/badges/91768a07-dffa-4c00-9795-1de1414e795b" target="_blank"
+               class="cert-verify-link">
+              🔗 Verifikasi via Credly
+            </a>
+          </div>
+        </div>
+
+        <!-- 2. IBM — Cybersecurity Fundamentals -->
+        <div class="cert-card reveal reveal-d2">
+          <div class="cert-issuer-badge">
+            <div class="cert-issuer-icon">🔵</div>
+            <div class="cert-issuer-name">IBM SkillsBuild</div>
+          </div>
+          <div class="cert-title">Cybersecurity Fundamentals</div>
+          <div class="cert-meta">
+            <span class="cert-date">📅 06 Mei 2025</span>
+            <span class="cert-validity">Valid</span>
+          </div>
+          <div class="cert-footer">
+            <a href="https://www.credly.com/badges/5c579bcc-ebf3-42a8-82c9-b6e9d1fb0d1b"
+               target="_blank" class="cert-verify-link">
+              🔗 Verifikasi via Credly
+            </a>
+          </div>
+        </div>
+
+        <!-- 3. Cisco — Introduction to Cybersecurity -->
+        <div class="cert-card reveal reveal-d3">
+          <div class="cert-issuer-badge">
+            <div class="cert-issuer-icon">🛡️</div>
+            <div class="cert-issuer-name">Cisco Networking Academy</div>
+          </div>
+          <div class="cert-title">Introduction to Cybersecurity</div>
+          <div class="cert-meta">
+            <span class="cert-date">📅 25 Apr 2025</span>
+            <span class="cert-validity">Valid</span>
+          </div>
+          <div class="cert-footer">
+            <a href="https://www.credly.com/badges/bc712d7e-8a20-4e8b-b2bf-f6ebe7f95e81" target="_blank"
+               class="cert-verify-link">
+              🔗 Verifikasi via Credly
+            </a>  
+          </div>
+        </div>
+
+        <!-- 4. Cisco — Computer Hardware Basics -->
+        <div class="cert-card reveal reveal-d1">
+          <div class="cert-issuer-badge">
+            <div class="cert-issuer-icon">🖥️</div>
+            <div class="cert-issuer-name">Cisco Networking Academy</div>
+          </div>
+          <div class="cert-title">Computer Hardware Basics</div>
+          <div class="cert-meta">
+            <span class="cert-date">📅 25 Apr 2025</span>
+            <span class="cert-validity">Valid</span>
+          </div>
+          <div class="cert-footer">
+            <a href="https://www.credly.com/badges/f03e376f-91ee-45e8-8668-195c03d18ac5" target="_blank"
+               class="cert-verify-link">
+              🔗 Verifikasi via Credly
+            </a>
+          </div>
+        </div>
+
+        <!-- 5. ID-Networkers — Cisco Dasar -->
+        <div class="cert-card reveal reveal-d2">
+          <div class="cert-issuer-badge">
+            <div class="cert-issuer-icon">🔧</div>
+            <div class="cert-issuer-name">ID-Networkers</div>
+          </div>
+          <div class="cert-title">Cisco Dasar</div>
+          <div class="cert-meta">
+            <span class="cert-date">📅 Berlaku s.d. 06 Agu 2028</span>
+            <span class="cert-validity">Valid</span>
+          </div>
+          <div class="cert-id-chip" onclick="copyCertId(this)" title="Klik untuk copy nomor sertifikat">
+            <span class="cert-id-label">No. Sertifikat</span>
+            <span class="cert-id-code">IDN-1754489759-184-64013</span>
+            <span class="cert-id-copied">✓ Disalin!</span>
+          </div>
+          <div class="cert-footer">
+            <a href="https://lms.idn.id/cert-verification?code=IDN-1754489759-184-64013"
+               target="_blank" class="cert-verify-link">
+              🔗 Verifikasi via IDN
+            </a>
+          </div>
+        </div>
+
+      </div>
+
+    </section>
+  </main>
+
+  <footer>
+    <p>© 2025 Raden Diazka Adhitya Budiman. Dibuat dengan HTML, CSS & JS.</p>
+  </footer>
+
+  <script>
+    function copyCertId(chip) {
+      const code = chip.querySelector('.cert-id-code').textContent;
+      navigator.clipboard.writeText(code).then(() => {
+        const copied = chip.querySelector('.cert-id-copied');
+        const codeEl = chip.querySelector('.cert-id-code');
+        codeEl.style.display = 'none';
+        copied.style.display = 'inline';
+        setTimeout(() => {
+          codeEl.style.display = 'inline';
+          copied.style.display = 'none';
+        }, 2000);
+      });
+    }
+  </script>
+  <script src="js/main.js"></script>
+</body>
+</html>
