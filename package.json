@@ -1,0 +1,7 @@
+{
+  "name": "portofolio-cloudflare",
+  "private": true,
+  "dependencies": {
+    "workers-og": "latest"
+  }
+}
