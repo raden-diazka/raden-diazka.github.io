@@ -12,6 +12,22 @@
   <meta property="og:image" content="assets/foto.png" />
   <link rel="stylesheet" href="css/style.css" />
   <style>
+    .like-btn {
+  display: inline-flex;
+  align-items: center;
+  gap: 0.35rem;
+  font-size: 0.8rem;
+  color: var(--text-muted);
+  border: 1px solid var(--border);
+  padding: 0.3rem 0.75rem;
+  border-radius: 6px;
+  background: transparent;
+  cursor: pointer;
+  transition: border-color var(--transition), color var(--transition);
+}
+.like-btn:hover { border-color: var(--accent); color: var(--accent); }
+.like-btn.liked { border-color: #ef4444; color: #ef4444; }
+    
     .portfolio-grid {
       display: grid;
       grid-template-columns: repeat(auto-fill, minmax(260px, 1fr));
@@ -141,6 +157,40 @@
     .project-preview-placeholder .preview-label { opacity: 0.5; font-family: "Syne", sans-serif; font-size: 0.7rem; letter-spacing: 0.05em; text-transform: uppercase; }
   </style>
 </head>
+  <script>
+document.querySelectorAll('.like-btn').forEach((btn) => {
+  const id = btn.dataset.id;
+  const countEl = btn.querySelector('.like-count');
+  const iconEl = btn.querySelector('.like-icon');
+
+  fetch(`/api/like?id=${id}`)
+    .then(r => r.json())
+    .then(d => { countEl.textContent = d.likes; })
+    .catch(() => {});
+
+  if (localStorage.getItem(`liked-${id}`)) {
+    btn.classList.add('liked');
+    iconEl.textContent = '❤️';
+  }
+
+  btn.addEventListener('click', () => {
+    if (localStorage.getItem(`liked-${id}`)) return;
+    fetch('/api/like', {
+      method: 'POST',
+      headers: { 'Content-Type': 'application/json' },
+      body: JSON.stringify({ id }),
+    })
+      .then(r => r.json())
+      .then(d => {
+        countEl.textContent = d.likes;
+        localStorage.setItem(`liked-${id}`, 'true');
+        btn.classList.add('liked');
+        iconEl.textContent = '❤️';
+      })
+      .catch(() => {});
+  });
+});
+</script>
 <body>
 
   <nav class="navbar">
@@ -205,7 +255,7 @@
       <h2 class="reveal" style="margin-bottom:1rem; font-size:1.1rem; color:var(--text-muted);">Proyek Pilihan</h2>
       <div class="portfolio-grid">
 
-        <div class="project-card reveal reveal-d1">
+        <div class="project-card reveal reveal-d1" data-id="asj">
           <div class="project-preview">
             <img src="assets/ss-asj.png" alt="Debian Server + Windows 7 Client - ASJ">
           </div>
@@ -214,14 +264,16 @@
             Konfigurasi Linux Debian sebagai server jaringan menggunakan VirtualBox,
             mencakup instalasi, manajemen user, dan pengaturan layanan dasar.
           </div>
-          <div class="project-links">
+          <div class="project-links" <button class="like-btn" data-id="asj">
+  <span class="like-icon">🤍</span> <span class="like-count">0</span>
+</button>>
             <span class="tag" style="font-size:0.7rem;">VirtualBox</span>
             <span class="tag" style="font-size:0.7rem;">Linux</span>
             <a href="https://diazkaa.blogspot.com/search/label/ASJ" target="_blank" class="project-link">Lihat di Blog →</a>
           </div>
         </div>
 
-        <div class="project-card reveal reveal-d2">
+        <div class="project-card reveal reveal-d1" data-id="tjkn">
           <div class="project-preview">
             <img src="assets/ss-tjkn.png" alt="Topologi Cisco Packet Tracer - TJKN">
           </div>
@@ -231,14 +283,16 @@
             pemasangan kabel Fiber Optic dan konfigurasi jaringan Wireless menggunakan
             Cisco Packet Tracer & PNETLab.
           </div>
-          <div class="project-links">
+          <div class="project-links" <button class="like-btn" data-id="tjkn">
+  <span class="like-icon">🤍</span> <span class="like-count">0</span>
+</button>>
             <span class="tag" style="font-size:0.7rem;">Cisco Packet Tracer</span>
             <span class="tag" style="font-size:0.7rem;">PNETLab</span>
             <a href="https://diazkaa.blogspot.com/search/label/FO-TJKN" target="_blank" class="project-link">Lihat di Blog →</a>
           </div>
         </div>
 
-        <div class="project-card reveal reveal-d3">
+        <div class="project-card reveal reveal-d1" data-id="pkpj">
           <div class="project-preview">
             <img src="assets/ss-pnetlab.png" alt="PnetLab Topology MikroTik RouterOS">
           </div>
@@ -247,7 +301,9 @@
             Melakukan konfigurasi perangkat jaringan via CLI MikroTik RouterOS, mencakup
             pengaturan IP Address, DHCP Server, dan manajemen koneksi antar jaringan.
           </div>
-          <div class="project-links">
+          <div class="project-links" <button class="like-btn" data-id="pkpj">
+  <span class="like-icon">🤍</span> <span class="like-count">0</span>
+</button>>
             <span class="tag" style="font-size:0.7rem;">MikroTik</span>
             <span class="tag" style="font-size:0.7rem;">Networking</span>
             <a href="https://diazkaa.blogspot.com/search/label/PKPJ" target="_blank" class="project-link">Lihat di Blog →</a>
