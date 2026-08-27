@@ -1,1 +1,12 @@
-{ "name": "diazka-portfolio-lab", "compatibility_date": "2026-08-27", "assets": { "directory": "./" } }
+{
+  "name": "diazka-portfolio-lab",
+  "compatibility_date": "2026-08-27",
+  "main": "worker.js",
+  "assets": {
+    "directory": "./",
+    "binding": "ASSETS"
+  },
+  "kv_namespaces": [
+    { "binding": "VIEWS", "id": "9c562c152b254af18f8f669e833a9e34" }
+  ]
+}
