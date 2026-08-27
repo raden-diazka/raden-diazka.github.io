@@ -1,5 +1,6 @@
 {
-  "name": "portofolio-cloudflare",
+// wrangler.jsonc
+"name": "portofolio-cloudflare",
   "compatibility_date": "2026-08-27",
   "main": "worker.js",
   "assets": {
