@@ -244,9 +244,13 @@
 
   <div class="hero-divider"></div>
 
-  <footer>
-    <p>© 2025 Raden Diazka Adhitya Budiman. Dibuat dengan HTML, CSS & JS.</p>
-  </footer>
+  <p>👀 Dilihat <span id="view-count">...</span> kali</p>
+<script>
+  fetch('/api/views')
+    .then(r => r.json())
+    .then(d => document.getElementById('view-count').textContent = d.views)
+    .catch(() => {});
+</script>
   
   <script src="https://cdnjs.cloudflare.com/ajax/libs/typed.js/2.0.16/typed.umd.js"></script>
   <script>
