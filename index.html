@@ -245,12 +245,22 @@
   <div class="hero-divider"></div>
 
   <p>👀 Dilihat <span id="view-count">...</span> kali</p>
-<script>
-  fetch('/api/views')
-    .then(r => r.json())
-    .then(d => document.getElementById('view-count').textContent = d.views)
-    .catch(() => {});
-</script>
+  <script src="https://challenges.cloudflare.com/turnstile/v0/api.js?onload=initTurnstile" async defer></script>
+  <div id="turnstile-container"></div>
+  <script src="js/turnstile-helper.js"></script>
+  <script>
+  (async () => {
+    const token = await getTurnstileToken();
+    fetch('/api/views', {
+      method: 'POST',
+      headers: { 'Content-Type': 'application/json' },
+      body: JSON.stringify({ token }),
+    })
+      .then(r => r.json())
+      .then(d => { document.getElementById('view-count').textContent = d.views; })
+      .catch(() => {});
+  })();
+  </script>
   
   <script src="https://cdnjs.cloudflare.com/ajax/libs/typed.js/2.0.16/typed.umd.js"></script>
   <script>
