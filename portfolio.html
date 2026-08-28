@@ -288,6 +288,9 @@
     <p>© 2025 Raden Diazka Adhitya Budiman. Dibuat dengan HTML, CSS & JS.</p>
   </footer>
 
+  <script src="https://challenges.cloudflare.com/turnstile/v0/api.js?onload=initTurnstile" async defer></script>
+  <div id="turnstile-container"></div>
+  <script src="js/turnstile-helper.js"></script>
   <script>
 document.querySelectorAll('.like-btn').forEach((btn) => {
   const id = btn.dataset.id;
@@ -306,14 +309,15 @@ document.querySelectorAll('.like-btn').forEach((btn) => {
 
   setLikedUI(!!localStorage.getItem(`liked-${id}`));
 
-  btn.addEventListener('click', () => {
+  btn.addEventListener('click', async () => {
     const currentlyLiked = !!localStorage.getItem(`liked-${id}`);
     const action = currentlyLiked ? 'unlike' : 'like';
+    const token = await getTurnstileToken();
 
     fetch('/api/like', {
       method: 'POST',
       headers: { 'Content-Type': 'application/json' },
-      body: JSON.stringify({ id, action }),
+      body: JSON.stringify({ id, action, token }),
     })
       .then(r => r.json())
       .then(d => {
