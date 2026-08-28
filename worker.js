@@ -33,14 +33,15 @@ export default {
     }
 
     if (url.pathname === "/api/like" && request.method === "POST") {
-      const { id } = await request.json();
-      let count = await env.VIEWS.get(`like:${id}`);
-      count = count ? parseInt(count) + 1 : 1;
-      await env.VIEWS.put(`like:${id}`, String(count));
-      return new Response(JSON.stringify({ likes: count }), {
-        headers: { "Content-Type": "application/json" },
-      });
-    }
+  const { id, action } = await request.json();
+  let count = await env.VIEWS.get(`like:${id}`);
+  count = count ? parseInt(count) : 0;
+  count = action === "unlike" ? Math.max(0, count - 1) : count + 1;
+  await env.VIEWS.put(`like:${id}`, String(count));
+  return new Response(JSON.stringify({ likes: count }), {
+    headers: { "Content-Type": "application/json" },
+  });
+}
 
     return env.ASSETS.fetch(request);
   },
