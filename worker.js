@@ -1,10 +1,31 @@
 import { ImageResponse } from 'workers-og';
 
+async function verifyTurnstile(token, secret, ip) {
+  if (!token) return false;
+  const formData = new FormData();
+  formData.append('secret', secret);
+  formData.append('response', token);
+  if (ip) formData.append('remoteip', ip);
+
+  const res = await fetch('https://challenges.cloudflare.com/turnstile/v0/siteverify', {
+    method: 'POST',
+    body: formData,
+  });
+  const data = await res.json();
+  return data.success;
+}
+
 export default {
   async fetch(request, env) {
     const url = new URL(request.url);
+    const ip = request.headers.get('CF-Connecting-IP');
 
-    if (url.pathname === "/api/views") {
+    if (url.pathname === "/api/views" && request.method === "POST") {
+      const { token } = await request.json();
+      const valid = await verifyTurnstile(token, env.TURNSTILE_SECRET, ip);
+      if (!valid) {
+        return new Response(JSON.stringify({ error: "Verifikasi gagal" }), { status: 403 });
+      }
       let count = await env.VIEWS.get("count");
       count = count ? parseInt(count) + 1 : 1;
       await env.VIEWS.put("count", String(count));
@@ -33,15 +54,19 @@ export default {
     }
 
     if (url.pathname === "/api/like" && request.method === "POST") {
-  const { id, action } = await request.json();
-  let count = await env.VIEWS.get(`like:${id}`);
-  count = count ? parseInt(count) : 0;
-  count = action === "unlike" ? Math.max(0, count - 1) : count + 1;
-  await env.VIEWS.put(`like:${id}`, String(count));
-  return new Response(JSON.stringify({ likes: count }), {
-    headers: { "Content-Type": "application/json" },
-  });
-}
+      const { id, action, token } = await request.json();
+      const valid = await verifyTurnstile(token, env.TURNSTILE_SECRET, ip);
+      if (!valid) {
+        return new Response(JSON.stringify({ error: "Verifikasi gagal" }), { status: 403 });
+      }
+      let count = await env.VIEWS.get(`like:${id}`);
+      count = count ? parseInt(count) : 0;
+      count = action === "unlike" ? Math.max(0, count - 1) : count + 1;
+      await env.VIEWS.put(`like:${id}`, String(count));
+      return new Response(JSON.stringify({ likes: count }), {
+        headers: { "Content-Type": "application/json" },
+      });
+    }
 
     return env.ASSETS.fetch(request);
   },
