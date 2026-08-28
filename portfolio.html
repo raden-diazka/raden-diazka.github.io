@@ -157,45 +157,6 @@
     .project-preview-placeholder .preview-label { opacity: 0.5; font-family: "Syne", sans-serif; font-size: 0.7rem; letter-spacing: 0.05em; text-transform: uppercase; }
   </style>
 </head>
-<script>
-document.querySelectorAll('.like-btn').forEach((btn) => {
-  const id = btn.dataset.id;
-  const countEl = btn.querySelector('.like-count');
-  const iconEl = btn.querySelector('.like-icon');
-
-  function setLikedUI(liked) {
-    btn.classList.toggle('liked', liked);
-    iconEl.textContent = liked ? '❤️' : '🤍';
-  }
-
-  fetch(`/api/like?id=${id}`)
-    .then(r => r.json())
-    .then(d => { countEl.textContent = d.likes; })
-    .catch(() => {});
-
-  setLikedUI(!!localStorage.getItem(`liked-${id}`));
-
-  btn.addEventListener('click', () => {
-    const currentlyLiked = !!localStorage.getItem(`liked-${id}`);
-    const action = currentlyLiked ? 'unlike' : 'like';
-
-    fetch('/api/like', {
-      method: 'POST',
-      headers: { 'Content-Type': 'application/json' },
-      body: JSON.stringify({ id, action }),
-    })
-      .then(r => r.json())
-      .then(d => {
-        countEl.textContent = d.likes;
-        action === 'like'
-          ? localStorage.setItem(`liked-${id}`, 'true')
-          : localStorage.removeItem(`liked-${id}`);
-        setLikedUI(action === 'like');
-      })
-      .catch(() => {});
-  });
-});
-</script>
 <body>
 
   <nav class="navbar">
@@ -327,6 +288,45 @@ document.querySelectorAll('.like-btn').forEach((btn) => {
     <p>© 2025 Raden Diazka Adhitya Budiman. Dibuat dengan HTML, CSS & JS.</p>
   </footer>
 
+  <script>
+document.querySelectorAll('.like-btn').forEach((btn) => {
+  const id = btn.dataset.id;
+  const countEl = btn.querySelector('.like-count');
+  const iconEl = btn.querySelector('.like-icon');
+
+  function setLikedUI(liked) {
+    btn.classList.toggle('liked', liked);
+    iconEl.textContent = liked ? '❤️' : '🤍';
+  }
+
+  fetch(`/api/like?id=${id}`)
+    .then(r => r.json())
+    .then(d => { countEl.textContent = d.likes; })
+    .catch(() => {});
+
+  setLikedUI(!!localStorage.getItem(`liked-${id}`));
+
+  btn.addEventListener('click', () => {
+    const currentlyLiked = !!localStorage.getItem(`liked-${id}`);
+    const action = currentlyLiked ? 'unlike' : 'like';
+
+    fetch('/api/like', {
+      method: 'POST',
+      headers: { 'Content-Type': 'application/json' },
+      body: JSON.stringify({ id, action }),
+    })
+      .then(r => r.json())
+      .then(d => {
+        countEl.textContent = d.likes;
+        action === 'like'
+          ? localStorage.setItem(`liked-${id}`, 'true')
+          : localStorage.removeItem(`liked-${id}`);
+        setLikedUI(action === 'like');
+      })
+      .catch(() => {});
+  });
+});
+  </script>
   <script src="js/main.js"></script>
 </body>
 </html>
