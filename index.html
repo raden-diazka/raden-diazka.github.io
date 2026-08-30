@@ -217,6 +217,21 @@
                     <div id="latest-post-widget" style="display:none; align-items:center; gap:0.5rem; font-size:0.85rem; color:var(--text-muted); border:1px solid var(--border); padding:0.5rem 1rem; border-radius:8px; margin:1rem 0; width:fit-content;">
             📝 Postingan terbaru: <a id="latest-post-link" href="#" target="_blank" style="color:var(--accent); font-weight:600;"></a>
           </div>
+
+          <script>
+fetch('/api/latest-post')
+  .then(r => r.json())
+  .then(d => {
+    if (d.title && d.link) {
+      const widget = document.getElementById('latest-post-widget');
+      const link = document.getElementById('latest-post-link');
+      link.href = d.link;
+      link.textContent = d.title;
+      widget.style.display = 'inline-flex';
+    }
+  })
+  .catch(() => {});
+</script>
           
           <!-- Stats Opsi A -->
           <div class="hero-stats">
