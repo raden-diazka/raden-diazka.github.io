@@ -15,6 +15,23 @@ async function verifyTurnstile(token, secret, ip) {
   return data.success;
 }
 
+async function fetchLatestPost() {
+  const res = await fetch('https://diazkaa.blogspot.com/feeds/posts/default?alt=rss&max-results=1');
+  const xml = await res.text();
+
+  const itemMatch = xml.match(/<item>([\s\S]*?)<\/item>/);
+  if (!itemMatch) return null;
+  const item = itemMatch[1];
+
+  const titleMatch = item.match(/<title>(?:<!\[CDATA\[)?([\s\S]*?)(?:\]\]>)?<\/title>/);
+  const linkMatch = item.match(/<link>([\s\S]*?)<\/link>/);
+
+  return {
+    title: titleMatch ? titleMatch[1].trim() : null,
+    link: linkMatch ? linkMatch[1].trim() : null,
+  };
+}
+
 export default {
   async fetch(request, env) {
     const url = new URL(request.url);
@@ -68,6 +85,31 @@ export default {
       });
     }
 
+    if (url.pathname === "/api/latest-post") {
+      const cached = await env.VIEWS.get('latest-post');
+      return new Response(cached || JSON.stringify({ title: null, link: null }), {
+        headers: { "Content-Type": "application/json" },
+      });
+    }
+
+    if (url.pathname === "/api/refresh-latest-post") {
+      const post = await fetchLatestPost();
+      if (post && post.title && post.link) {
+        await env.VIEWS.put('latest-post', JSON.stringify(post));
+        return new Response(JSON.stringify({ ok: true, post }), {
+          headers: { "Content-Type": "application/json" },
+        });
+      }
+      return new Response(JSON.stringify({ ok: false }), { status: 500 });
+    }
+
     return env.ASSETS.fetch(request);
+  },
+
+  async scheduled(event, env, ctx) {
+    const post = await fetchLatestPost();
+    if (post && post.title && post.link) {
+      await env.VIEWS.put('latest-post', JSON.stringify(post));
+    }
   },
 };
