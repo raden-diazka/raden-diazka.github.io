@@ -9,5 +9,8 @@
   },
   "kv_namespaces": [
     { "binding": "VIEWS", "id": "809e3f96ca6946fa9f79b578aa631374" }
-  ]
+  ],
+  "triggers": {
+    "crons": ["0 */6 * * *"]
+  }
 }
