@@ -17,8 +17,10 @@ if (hamburger && navLinks) {
 
 // --- Active nav link ---
 const currentPage = window.location.pathname.split('/').pop() || 'index.html';
+const normalizePage = (name) => name.replace(/\.html$/, '') || 'index';
 document.querySelectorAll('.nav-links a').forEach(link => {
-  if (link.getAttribute('href') === currentPage) link.classList.add('active');
+  const href = link.getAttribute('href');
+  if (normalizePage(href) === normalizePage(currentPage)) link.classList.add('active');
 });
 
 // ============================================
