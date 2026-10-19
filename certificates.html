@@ -12,38 +12,44 @@
   <link rel="stylesheet" href="css/style.css" />
   <style>
     /* =============================================
-       SHARED HIGHLIGHT CARD BASE
+       LKS HIGHLIGHT CARD
     ============================================= */
-    .hl-card {
+    .lks-highlight {
       position: relative;
       border-radius: 16px;
       overflow: hidden;
       margin-bottom: 3rem;
+      border: 1px solid rgba(250,189,47,0.35);
+      background: linear-gradient(135deg, #1a1500 0%, #161b22 45%, #0d1117 100%);
+      box-shadow: 0 0 0 1px rgba(250,189,47,0.10), 0 20px 60px rgba(250,189,47,0.07);
       transition: box-shadow 0.35s ease, transform 0.35s ease;
     }
 
-    .hl-card:hover {
+    .lks-highlight:hover {
       transform: translateY(-4px);
+      box-shadow: 0 0 0 1px rgba(250,189,47,0.28), 0 28px 70px rgba(250,189,47,0.13);
     }
 
-    .hl-card::before {
+    .lks-highlight::before {
       content: "";
       position: absolute;
       top: 0; left: 0; right: 0;
       height: 2px;
+      background: linear-gradient(90deg, transparent 0%, #fabd2f 30%, #fde68a 50%, #fabd2f 70%, transparent 100%);
       z-index: 2;
     }
 
-    .hl-card::after {
+    .lks-highlight::after {
       content: "";
       position: absolute;
       top: -50%; left: -10%;
       width: 55%; height: 220%;
+      background: radial-gradient(ellipse, rgba(250,189,47,0.04) 0%, transparent 60%);
       pointer-events: none;
       z-index: 0;
     }
 
-    .hl-inner {
+    .lks-inner {
       position: relative;
       z-index: 1;
       display: grid;
@@ -53,26 +59,21 @@
       align-items: start;
     }
 
-    .hl-left {
-      display: flex;
-      flex-direction: column;
-      gap: 1.1rem;
-      min-width: 0;
-    }
+    .lks-left { display: flex; flex-direction: column; gap: 1rem; }
 
-    .hl-badge-row {
+    .lks-badge-row {
       display: flex;
       align-items: center;
       gap: 0.6rem;
       flex-wrap: wrap;
     }
 
-    .hl-badge {
+    .lks-badge {
       display: inline-flex;
       align-items: center;
       gap: 0.35rem;
       border-radius: 999px;
-      padding: 0.28rem 0.8rem;
+      padding: 0.22rem 0.75rem;
       font-size: 0.7rem;
       font-weight: 600;
       font-family: "Syne", sans-serif;
@@ -80,220 +81,131 @@
       text-transform: uppercase;
     }
 
-    .hl-rank-row {
-      display: flex;
-      align-items: center;
-      gap: 1rem;
-    }
-
-    .hl-medal {
-      width: 44px;
-      height: 44px;
-      flex-shrink: 0;
-      display: flex;
-      align-items: center;
-      justify-content: center;
-    }
-
-    .hl-medal svg {
-      width: 100%;
-      height: 100%;
-    }
-
-    .hl-rank {
-      font-family: "Syne", sans-serif;
-      font-size: 2.2rem;
-      font-weight: 800;
-      line-height: 1;
-      letter-spacing: -0.03em;
-      -webkit-background-clip: text;
-      -webkit-text-fill-color: transparent;
-      background-clip: text;
-    }
-
-    .hl-rank-desc {
-      display: flex;
-      flex-direction: column;
-      gap: 0.15rem;
-    }
-
-    .hl-rank-event {
-      font-size: 0.84rem;
-      font-weight: 600;
-      color: var(--text-main);
-      line-height: 1.35;
-    }
-
-    .hl-rank-org {
-      font-size: 0.76rem;
-      color: var(--text-muted);
-      line-height: 1.4;
-    }
-
-    .hl-title {
-      font-family: "Syne", sans-serif;
-      font-size: 1.1rem;
-      font-weight: 700;
-      color: var(--text-main);
-      line-height: 1.4;
-      padding-bottom: 1rem;
-    }
-
-    .hl-title span {
-      color: var(--text-muted);
-      font-weight: 400;
-      font-size: 0.85rem;
-      display: block;
-      margin-top: 0.25rem;
-    }
-
-    .hl-meta-grid {
-      display: grid;
-      grid-template-columns: 1fr 1fr;
-      gap: 0.7rem 1.5rem;
-    }
-
-    .hl-meta-item {
-      display: flex;
-      align-items: center;
-      gap: 0.45rem;
-      font-size: 0.78rem;
-      color: var(--text-muted);
-      line-height: 1.4;
-    }
-
-    .hl-meta-item strong {
-      color: var(--text-main);
-      font-weight: 500;
-    }
-
-    .hl-meta-item svg {
-      flex-shrink: 0;
-      width: 14px;
-      height: 14px;
-      opacity: 0.8;
-    }
-
-    /* =============================================
-       LKS THEME — GOLD
-    ============================================= */
-    .lks-card {
-      border: 1px solid rgba(250,189,47,0.35);
-      background: linear-gradient(135deg, #1a1500 0%, #161b22 45%, #0d1117 100%);
-      box-shadow: 0 0 0 1px rgba(250,189,47,0.10), 0 20px 60px rgba(250,189,47,0.07);
-    }
-
-    .lks-card:hover {
-      box-shadow: 0 0 0 1px rgba(250,189,47,0.28), 0 28px 70px rgba(250,189,47,0.13);
-    }
-
-    .lks-card::before {
-      background: linear-gradient(90deg, transparent 0%, #fabd2f 30%, #fde68a 50%, #fabd2f 70%, transparent 100%);
-    }
-
-    .lks-card::after {
-      background: radial-gradient(ellipse, rgba(250,189,47,0.04) 0%, transparent 60%);
-    }
-
-    .lks-card .hl-title {
-      border-bottom: 1px solid rgba(250,189,47,0.15);
-    }
-
-    .lks-card .hl-badge-gold {
+    .lks-badge-gold {
       background: rgba(250,189,47,0.12);
       border: 1px solid rgba(250,189,47,0.4);
       color: #fabd2f;
     }
 
-    .lks-card .hl-badge-green {
+    .lks-badge-blue {
+      background: rgba(59,130,246,0.12);
+      border: 1px solid rgba(59,130,246,0.3);
+      color: #60a5fa;
+    }
+
+    .lks-badge-green {
       background: rgba(74,222,128,0.1);
       border: 1px solid rgba(74,222,128,0.3);
       color: #4ade80;
       font-size: 0.68rem;
     }
 
-    .lks-card .hl-rank {
-      background-image: linear-gradient(135deg, #fabd2f 0%, #f59e0b 55%, #fde68a 100%);
+    .lks-rank-row {
+      display: flex;
+      align-items: center;
+      gap: 1rem;
     }
 
-    /* =============================================
-       FORTINET THEME — GREEN
-    ============================================= */
-    .profcert-card {
-      border: 1px solid rgba(74,222,128,0.30);
-      background: linear-gradient(135deg, #04140c 0%, #0f1d18 45%, #0d1117 100%);
-      box-shadow: 0 0 0 1px rgba(74,222,128,0.08), 0 20px 60px rgba(74,222,128,0.05);
+    .lks-medal { font-size: 2.4rem; line-height: 1; flex-shrink: 0; }
+
+    .lks-rank {
+      font-family: "Syne", sans-serif;
+      font-size: 2.4rem;
+      font-weight: 800;
+      line-height: 1;
+      background: linear-gradient(135deg, #fabd2f 0%, #f59e0b 55%, #fde68a 100%);
+      -webkit-background-clip: text;
+      -webkit-text-fill-color: transparent;
+      background-clip: text;
+      letter-spacing: -0.03em;
+      white-space: nowrap;
     }
 
-    .profcert-card:hover {
-      box-shadow: 0 0 0 1px rgba(74,222,128,0.25), 0 28px 70px rgba(74,222,128,0.12);
-    }
-
-    .profcert-card::before {
-      background: linear-gradient(90deg, transparent 0%, #4ade80 30%, #86efac 50%, #4ade80 70%, transparent 100%);
-    }
-
-    .profcert-card::after {
-      background: radial-gradient(ellipse, rgba(74,222,128,0.04) 0%, transparent 60%);
-    }
-
-    .profcert-card .hl-title {
-      border-bottom: 1px solid rgba(74,222,128,0.15);
-    }
-
-    .profcert-card .hl-badge-green {
-      background: rgba(74,222,128,0.12);
-      border: 1px solid rgba(74,222,128,0.4);
-      color: #4ade80;
-    }
-
-    .profcert-card .hl-badge-blue {
-      background: rgba(59,130,246,0.12);
-      border: 1px solid rgba(59,130,246,0.3);
-      color: #60a5fa;
-    }
-
-    .profcert-card .hl-rank {
-      background-image: linear-gradient(135deg, #4ade80 0%, #22c55e 55%, #86efac 100%);
-    }
-
-    /* =============================================
-       CERT VIEWER (badge + PDF group)
-    ============================================= */
-    .hl-cert-section {
-      margin-top: 0;
+    .lks-rank-desc {
       display: flex;
       flex-direction: column;
-      align-items: stretch;
-      width: 260px;
-      flex-shrink: 0;
+      gap: 0.1rem;
     }
 
-    .hl-cert-viewer {
+    .lks-rank-event {
+      font-size: 0.82rem;
+      font-weight: 600;
+      color: var(--text-main);
+      line-height: 1.3;
+    }
+
+    .lks-rank-org {
+      font-size: 0.75rem;
+      color: var(--text-muted);
+    }
+
+    .lks-title {
+      font-family: "Syne", sans-serif;
+      font-size: 1.1rem;
+      font-weight: 700;
+      color: var(--text-main);
+      line-height: 1.35;
+      padding-bottom: 0.9rem;
+      border-bottom: 1px solid rgba(250,189,47,0.12);
+    }
+
+    .lks-title span {
+      color: var(--text-muted);
+      font-weight: 400;
+      font-size: 0.85rem;
+    }
+
+    .lks-meta-grid {
+      display: grid;
+      grid-template-columns: 1fr 1fr;
+      gap: 0.55rem 1.5rem;
+    }
+
+    .lks-meta-item {
+      display: flex;
+      align-items: center;
+      gap: 0.4rem;
+      font-size: 0.78rem;
+      color: var(--text-muted);
+    }
+
+    .lks-meta-item strong {
+      color: var(--text-main);
+      font-weight: 500;
+    }
+
+    /* =============================================
+       LKS SERTIFIKAT VIEWER
+    ============================================= */
+    .lks-cert-section {
+      margin-top: 0.25rem;
+    }
+
+    .lks-cert-viewer {
+      border: 1px solid rgba(250,189,47,0.25);
       border-radius: 10px;
       overflow: hidden;
       background: #000;
       position: relative;
-      cursor: pointer;
+      cursor: zoom-in;
       transition: border-color 0.25s ease, box-shadow 0.25s ease;
-      display: block;
-      border: 1px solid transparent;
     }
 
-    .hl-cert-viewer:hover {
-      box-shadow: 0 6px 24px rgba(0,0,0,0.3);
+    .lks-cert-viewer:hover {
+      border-color: rgba(250,189,47,0.55);
+      box-shadow: 0 6px 24px rgba(250,189,47,0.1);
     }
 
-    .hl-cert-viewer img {
-      width: 100%;
+    .lks-cert-viewer img {
+      width: 260px;
       height: auto;
       display: block;
       transition: transform 0.3s ease;
     }
 
-    .hl-cert-viewer:hover img { transform: scale(1.02); }
+    .lks-cert-viewer:hover img { transform: scale(1.02); }
 
-    .hl-cert-overlay {
+    .lks-cert-overlay {
       position: absolute;
       inset: 0;
       display: flex;
@@ -303,13 +215,13 @@
       transition: background 0.25s ease;
     }
 
-    .hl-cert-viewer:hover .hl-cert-overlay {
-      background: rgba(0,0,0,0.35);
+    .lks-cert-viewer:hover .lks-cert-overlay {
+      background: rgba(0,0,0,0.3);
     }
 
-    .hl-cert-zoom-hint {
+    .lks-cert-zoom-hint {
       opacity: 0;
-      background: rgba(255,255,255,0.95);
+      background: rgba(250,189,47,0.9);
       color: #000;
       font-size: 0.72rem;
       font-weight: 700;
@@ -321,104 +233,26 @@
       transition: opacity 0.25s ease;
     }
 
-    .hl-cert-viewer:hover .hl-cert-zoom-hint { opacity: 1; }
+    .lks-cert-viewer:hover .lks-cert-zoom-hint { opacity: 1; }
 
-    .hl-pdf-btn {
-      display: flex;
-      align-items: center;
-      justify-content: center;
-      gap: 0.5rem;
-      margin-top: 0.7rem;
-      width: 100%;
-      padding: 0.7rem 1rem;
-      border-radius: 8px;
-      font-family: "Syne", sans-serif;
-      font-size: 0.78rem;
-      font-weight: 600;
-      letter-spacing: 0.05em;
-      text-transform: uppercase;
-      text-decoration: none;
-      transition: background 0.25s ease, color 0.25s ease, border-color 0.25s ease;
-      box-sizing: border-box;
-    }
-
-    .hl-cert-label {
+    .lks-cert-label {
       text-align: center;
       font-size: 0.65rem;
       color: var(--text-muted);
-      margin-top: 0.55rem;
+      margin-top: 0.45rem;
       font-family: "Syne", sans-serif;
       letter-spacing: 0.06em;
       text-transform: uppercase;
     }
 
-    .hl-verify-link {
-      display: block;
-      text-align: center;
-      margin-top: 0.7rem;
-      width: 100%;
-      font-size: 0.78rem;
-      color: var(--accent);
-      text-decoration: none;
-      transition: color 0.25s ease;
-      box-sizing: border-box;
-    }
-
-    .lks-card .hl-cert-viewer {
-      border-color: rgba(250,189,47,0.25);
-    }
-
-    .lks-card .hl-cert-viewer:hover {
-      border-color: rgba(250,189,47,0.55);
-      box-shadow: 0 6px 24px rgba(250,189,47,0.1);
-    }
-
-    .lks-card .hl-pdf-btn {
-      background: rgba(250,189,47,0.10);
-      border: 1px solid rgba(250,189,47,0.40);
-      color: #fabd2f;
-    }
-
-    .lks-card .hl-pdf-btn:hover {
-      background: rgba(250,189,47,0.20);
-      color: #fde68a;
-    }
-
-    .profcert-card .hl-cert-viewer {
-      border-color: rgba(74,222,128,0.25);
-    }
-
-    .profcert-card .hl-cert-viewer:hover {
-      border-color: rgba(74,222,128,0.55);
-      box-shadow: 0 6px 24px rgba(74,222,128,0.1);
-    }
-
-    .profcert-card .hl-pdf-btn {
-      background: rgba(74,222,128,0.10);
-      border: 1px solid rgba(74,222,128,0.40);
-      color: #4ade80;
-    }
-
-    .profcert-card .hl-pdf-btn:hover {
-      background: rgba(74,222,128,0.20);
-      color: #86efac;
-    }
-
-    .hl-verify-link:hover {
-      color: var(--white);
-    }
-
-    .lks-card .hl-verify-link:hover { color: #fabd2f; }
-    .profcert-card .hl-verify-link:hover { color: #4ade80; }
-
     /* =============================================
        LIGHTBOX
     ============================================= */
-    .hl-lightbox {
+    .lks-lightbox {
       display: none;
       position: fixed;
       inset: 0;
-      background: rgba(0,0,0,0.92);
+      background: rgba(0,0,0,0.9);
       z-index: 9999;
       align-items: center;
       justify-content: center;
@@ -427,27 +261,28 @@
       cursor: zoom-out;
     }
 
-    .hl-lightbox.open { display: flex; }
+    .lks-lightbox.open { display: flex; }
 
-    .hl-lightbox-wrap {
+    .lks-lightbox-wrap {
       position: relative;
       max-width: 900px;
       width: 100%;
     }
 
-    .hl-lightbox-img {
+    .lks-lightbox-img {
       width: 100%;
       border-radius: 12px;
+      border: 1px solid rgba(250,189,47,0.3);
       box-shadow: 0 30px 80px rgba(0,0,0,0.7);
       display: block;
     }
 
-    .hl-lightbox-close {
+    .lks-lightbox-close {
       position: absolute;
       top: -18px; right: -18px;
       width: 38px; height: 38px;
       background: var(--surface);
-      border: 1px solid var(--border);
+      border: 1px solid rgba(250,189,47,0.4);
       border-radius: 50%;
       display: flex; align-items: center; justify-content: center;
       cursor: pointer;
@@ -457,13 +292,13 @@
       z-index: 10;
     }
 
-    .hl-lightbox-close:hover {
-      color: var(--white);
-      background: var(--accent);
-      border-color: var(--accent);
+    .lks-lightbox-close:hover {
+      border-color: #fabd2f;
+      color: #fabd2f;
+      background: rgba(250,189,47,0.1);
     }
 
-    .hl-lightbox-caption {
+    .lks-lightbox-caption {
       text-align: center;
       margin-top: 1rem;
       font-size: 0.8rem;
@@ -471,6 +306,309 @@
       font-family: "Syne", sans-serif;
       letter-spacing: 0.05em;
     }
+
+    /* =============================================
+       PROFESSIONAL CERT HIGHLIGHT — FORTINET NSE 1
+    ============================================= */
+    .profcert-highlight {
+      position: relative;
+      border-radius: 16px;
+      overflow: hidden;
+      margin-bottom: 3rem;
+      border: 1px solid rgba(74,222,128,0.30);
+      background: linear-gradient(135deg, #04140c 0%, #0f1d18 45%, #0d1117 100%);
+      box-shadow: 0 0 0 1px rgba(74,222,128,0.08), 0 20px 60px rgba(74,222,128,0.05);
+      transition: box-shadow 0.35s ease, transform 0.35s ease;
+    }
+
+    .profcert-highlight:hover {
+      transform: translateY(-4px);
+      box-shadow: 0 0 0 1px rgba(74,222,128,0.25), 0 28px 70px rgba(74,222,128,0.12);
+    }
+
+    .profcert-highlight::before {
+      content: "";
+      position: absolute;
+      top: 0; left: 0; right: 0;
+      height: 2px;
+      background: linear-gradient(90deg, transparent 0%, #4ade80 30%, #86efac 50%, #4ade80 70%, transparent 100%);
+      z-index: 2;
+    }
+
+    .profcert-highlight::after {
+      content: "";
+      position: absolute;
+      top: -50%; left: -10%;
+      width: 55%; height: 220%;
+      background: radial-gradient(ellipse, rgba(74,222,128,0.04) 0%, transparent 60%);
+      pointer-events: none;
+      z-index: 0;
+    }
+
+    .profcert-inner {
+      position: relative;
+      z-index: 1;
+      display: grid;
+      grid-template-columns: 1fr auto;
+      gap: 2.5rem;
+      padding: 2rem 2.25rem;
+      align-items: start;
+    }
+
+    .profcert-left { display: flex; flex-direction: column; gap: 1rem; }
+
+    .profcert-badge-row {
+      display: flex;
+      align-items: center;
+      gap: 0.6rem;
+      flex-wrap: wrap;
+    }
+
+    .profcert-badge {
+      display: inline-flex;
+      align-items: center;
+      gap: 0.35rem;
+      border-radius: 999px;
+      padding: 0.22rem 0.75rem;
+      font-size: 0.7rem;
+      font-weight: 600;
+      font-family: "Syne", sans-serif;
+      letter-spacing: 0.06em;
+      text-transform: uppercase;
+    }
+
+    .profcert-badge-green {
+      background: rgba(74,222,128,0.12);
+      border: 1px solid rgba(74,222,128,0.4);
+      color: #4ade80;
+    }
+
+    .profcert-badge-blue {
+      background: rgba(59,130,246,0.12);
+      border: 1px solid rgba(59,130,246,0.3);
+      color: #60a5fa;
+    }
+
+    .profcert-rank-row {
+      display: flex;
+      align-items: center;
+      gap: 1rem;
+    }
+
+    .profcert-medal { font-size: 2.4rem; line-height: 1; flex-shrink: 0; }
+
+    .profcert-rank {
+      font-family: "Syne", sans-serif;
+      font-size: 2rem;
+      font-weight: 800;
+      line-height: 1;
+      background: linear-gradient(135deg, #4ade80 0%, #22c55e 55%, #86efac 100%);
+      -webkit-background-clip: text;
+      -webkit-text-fill-color: transparent;
+      background-clip: text;
+      letter-spacing: -0.03em;
+      white-space: nowrap;
+    }
+
+    .profcert-rank-desc { display: flex; flex-direction: column; gap: 0.1rem; }
+
+    .profcert-rank-event {
+      font-size: 0.82rem;
+      font-weight: 600;
+      color: var(--text-main);
+      line-height: 1.3;
+    }
+
+    .profcert-rank-org {
+      font-size: 0.75rem;
+      color: var(--text-muted);
+    }
+
+    .profcert-title {
+      font-family: "Syne", sans-serif;
+      font-size: 1.1rem;
+      font-weight: 700;
+      color: var(--text-main);
+      line-height: 1.35;
+      padding-bottom: 0.9rem;
+      border-bottom: 1px solid rgba(74,222,128,0.12);
+    }
+
+    .profcert-title span {
+      color: var(--text-muted);
+      font-weight: 400;
+      font-size: 0.85rem;
+    }
+
+    .profcert-meta-grid {
+      display: grid;
+      grid-template-columns: 1fr 1fr;
+      gap: 0.55rem 1.5rem;
+    }
+
+    .profcert-meta-item {
+      display: flex;
+      align-items: center;
+      gap: 0.4rem;
+      font-size: 0.78rem;
+      color: var(--text-muted);
+    }
+
+    .profcert-meta-item strong { color: var(--text-main); font-weight: 500; }
+
+    /* Cert ID chip for Fortinet (copy-on-click) */
+    .profcert-id-chip {
+      display: inline-flex;
+      align-items: center;
+      gap: 0.4rem;
+      background: rgba(74,222,128,0.06);
+      border: 1px solid rgba(74,222,128,0.25);
+      border-radius: 4px;
+      padding: 0.28rem 0.6rem;
+      font-size: 0.72rem;
+      font-family: "Courier New", monospace;
+      color: var(--text-muted);
+      cursor: pointer;
+      transition: border-color 0.25s ease, color 0.25s ease, background 0.25s ease;
+      user-select: none;
+      margin-top: 0.3rem;
+      width: fit-content;
+    }
+
+    .profcert-id-chip:hover {
+      border-color: rgba(74,222,128,0.6);
+      color: #4ade80;
+      background: rgba(74,222,128,0.12);
+    }
+
+    .profcert-id-chip .cert-id-label {
+      font-size: 0.65rem;
+      text-transform: uppercase;
+      letter-spacing: 0.05em;
+      color: #4ade80;
+      font-family: var(--font-body);
+      font-weight: 600;
+    }
+
+    .profcert-id-chip .cert-id-code {
+      font-family: "Courier New", monospace;
+    }
+
+    .profcert-id-chip .cert-id-copied {
+      font-size: 0.65rem;
+      color: #4ade80;
+      display: none;
+    }
+
+    /* =============================================
+       FORTINET CERT VIEWER (badge + PDF group)
+    ============================================= */
+    .profcert-cert-section { margin-top: 0.25rem; }
+
+    .profcert-cert-viewer {
+      border: 1px solid rgba(74,222,128,0.25);
+      border-radius: 10px;
+      overflow: hidden;
+      background: #000;
+      position: relative;
+      cursor: pointer;
+      transition: border-color 0.25s ease, box-shadow 0.25s ease;
+      display: block;
+    }
+
+    .profcert-cert-viewer:hover {
+      border-color: rgba(74,222,128,0.55);
+      box-shadow: 0 6px 24px rgba(74,222,128,0.1);
+    }
+
+    .profcert-cert-viewer img {
+      width: 260px;
+      height: auto;
+      display: block;
+      transition: transform 0.3s ease;
+    }
+
+    .profcert-cert-viewer:hover img { transform: scale(1.02); }
+
+    .profcert-cert-overlay {
+      position: absolute;
+      inset: 0;
+      display: flex;
+      align-items: center;
+      justify-content: center;
+      background: rgba(0,0,0,0);
+      transition: background 0.25s ease;
+    }
+
+    .profcert-cert-viewer:hover .profcert-cert-overlay {
+      background: rgba(0,0,0,0.35);
+    }
+
+    .profcert-cert-zoom-hint {
+      opacity: 0;
+      background: rgba(74,222,128,0.9);
+      color: #000;
+      font-size: 0.72rem;
+      font-weight: 700;
+      font-family: "Syne", sans-serif;
+      letter-spacing: 0.06em;
+      text-transform: uppercase;
+      padding: 0.4rem 0.9rem;
+      border-radius: 6px;
+      transition: opacity 0.25s ease;
+    }
+
+    .profcert-cert-viewer:hover .profcert-cert-zoom-hint { opacity: 1; }
+
+    .profcert-pdf-btn {
+      display: flex;
+      align-items: center;
+      justify-content: center;
+      gap: 0.5rem;
+      margin-top: 0.6rem;
+      width: 260px;
+      padding: 0.6rem 1rem;
+      background: rgba(74,222,128,0.10);
+      border: 1px solid rgba(74,222,128,0.40);
+      border-radius: 8px;
+      color: #4ade80;
+      font-family: "Syne", sans-serif;
+      font-size: 0.78rem;
+      font-weight: 600;
+      letter-spacing: 0.05em;
+      text-transform: uppercase;
+      text-decoration: none;
+      transition: background 0.25s ease, color 0.25s ease;
+    }
+
+    .profcert-pdf-btn:hover {
+      background: rgba(74,222,128,0.20);
+      color: #86efac;
+    }
+
+    .profcert-cert-label {
+      text-align: center;
+      font-size: 0.65rem;
+      color: var(--text-muted);
+      margin-top: 0.45rem;
+      font-family: "Syne", sans-serif;
+      letter-spacing: 0.06em;
+      text-transform: uppercase;
+      width: 260px;
+    }
+
+    .profcert-verify-link {
+      display: block;
+      text-align: center;
+      margin-top: 0.6rem;
+      width: 260px;
+      font-size: 0.78rem;
+      color: var(--accent);
+      text-decoration: none;
+      transition: color 0.25s ease;
+    }
+
+    .profcert-verify-link:hover { color: #4ade80; }
 
     /* =============================================
        SECTION LABEL
@@ -601,48 +739,39 @@
 
     .cert-stat-label { font-size: 0.78rem; color: var(--text-muted); margin-top: 0.2rem; }
 
-    /* Light mode adjustments */
-    body.light .lks-card {
+    /* Light mode */
+    body.light .lks-highlight {
       background: linear-gradient(135deg, #fffbeb 0%, #ffffff 50%, #f4f6fb 100%);
     }
 
-    body.light .profcert-card {
+    body.light .profcert-highlight {
       background: linear-gradient(135deg, #f0fdf4 0%, #ffffff 50%, #f4f6fb 100%);
     }
 
     /* Responsive */
-    @media (max-width: 760px) {
-      .hl-inner {
+    @media (max-width: 700px) {
+      .lks-inner {
         grid-template-columns: 1fr;
         gap: 1.5rem;
       }
 
-      .hl-cert-section {
-        order: -1;
-        width: 100%;
-        max-width: 320px;
-        margin: 0 auto;
+      .lks-cert-section { order: -1; }
+      .lks-cert-viewer img { width: 100%; }
+
+      .profcert-inner {
+        grid-template-columns: 1fr;
+        gap: 1.5rem;
       }
 
-      .hl-meta-grid { grid-template-columns: 1fr; }
+      .profcert-cert-section { order: -1; }
+      .profcert-cert-viewer img { width: 100%; }
+      .profcert-pdf-btn, .profcert-cert-label, .profcert-verify-link { width: 100%; }
+
+      .lks-meta-grid { grid-template-columns: 1fr; }
+      .profcert-meta-grid { grid-template-columns: 1fr; }
 
       .cert-stats { gap: 0.75rem; }
       .cert-stat { padding: 1rem; }
-    }
-
-    @media (max-width: 480px) {
-      .hl-inner {
-        padding: 1.5rem 1.25rem;
-      }
-
-      .hl-rank {
-        font-size: 1.8rem;
-      }
-
-      .hl-medal {
-        width: 36px;
-        height: 36px;
-      }
     }
   </style>
 </head>
@@ -695,86 +824,70 @@
       ============================================= -->
       <div class="section-label reveal">✦ Pencapaian Utama</div>
 
-      <div class="hl-card lks-card reveal reveal-d1">
-        <div class="hl-inner">
+      <div class="lks-highlight reveal reveal-d1">
+        <div class="lks-inner">
 
           <!-- LEFT: Info -->
-          <div class="hl-left">
+          <div class="lks-left">
 
-            <div class="hl-badge-row">
-              <span class="hl-badge hl-badge-gold">🏆 LKS Nasional — Tingkat Kota</span>
-              <span class="hl-badge hl-badge-green">✓ Valid</span>
+            <div class="lks-badge-row">
+              <span class="lks-badge lks-badge-gold">🏆 LKS Nasional — Tingkat Kota</span>
+              <span class="lks-badge lks-badge-green">✓ Valid</span>
             </div>
 
-            <div class="hl-rank-row">
-              <div class="hl-medal">
-                <!-- Silver medal SVG -->
-                <svg viewBox="0 0 24 24" fill="none" xmlns="http://www.w3.org/2000/svg">
-                  <path d="M12 2L14.5 8.5L21 9.3L16 14L17.5 21L12 17.5L6.5 21L8 14L3 9.3L9.5 8.5L12 2Z" fill="url(#silverGrad)" stroke="#cbd5e1" stroke-width="0.5" stroke-linejoin="round"/>
-                  <defs>
-                    <linearGradient id="silverGrad" x1="0" y1="0" x2="24" y2="24">
-                      <stop offset="0%" stop-color="#e2e8f0"/>
-                      <stop offset="50%" stop-color="#cbd5e1"/>
-                      <stop offset="100%" stop-color="#94a3b8"/>
-                    </linearGradient>
-                  </defs>
-                </svg>
-              </div>
-              <div class="hl-rank">Juara 2</div>
-              <div class="hl-rank-desc">
-                <div class="hl-rank-event">Lomba Kompetensi Siswa Nasional<br>Tingkat Kota Bandung 2026</div>
-                <div class="hl-rank-org">Disdik Jabar · MKKSMK Kota Bandung</div>
+            <div class="lks-rank-row">
+              <div class="lks-medal">🥈</div>
+              <div class="lks-rank">Juara 2</div>
+              <div class="lks-rank-desc">
+                <div class="lks-rank-event">Lomba Kompetensi Siswa Nasional<br>Tingkat Kota Bandung 2026</div>
+                <div class="lks-rank-org">Disdik Jabar · MKKSMK Kota Bandung</div>
               </div>
             </div>
 
-            <div class="hl-title">
+            <div class="lks-title">
               Teknologi Informasi Sistem Administrasi Jaringan
-              <span>(IT Network System Administration)</span>
+              <span>&nbsp;(IT Network System Administration)</span>
             </div>
 
-            <div class="hl-meta-grid">
-              <div class="hl-meta-item">
-                <svg viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2"><path d="M3 21h18M5 21V7l7-4 7 4v14M9 21v-6h6v6"/></svg>
-                <strong>SMKN 13 Bandung</strong>
-              </div>
-              <div class="hl-meta-item">
-                <svg viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2"><rect x="3" y="4" width="18" height="18" rx="2"/><path d="M16 2v4M8 2v4M3 10h18"/></svg>
-                <strong>13 Mei 2026</strong>
-              </div>
-              <div class="hl-meta-item">
-                <svg viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2"><path d="M14 2H6a2 2 0 0 0-2 2v16a2 2 0 0 0 2 2h12a2 2 0 0 0 2-2V8z"/><path d="M14 2v6h6M16 13H8M16 17H8M10 9H8"/></svg>
-                <strong>No. 195/MKKSMK Kota Bandung/V/2026</strong>
-              </div>
-              <div class="hl-meta-item">
-                <svg viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2"><path d="M21 10c0 7-9 13-9 13s-9-6-9-13a9 9 0 0 1 18 0z"/><circle cx="12" cy="10" r="3"/></svg>
-                <strong>Kota Bandung, 11–13 Mei 2026</strong>
-              </div>
+            <div class="lks-meta-grid">
+              <div class="lks-meta-item">🏫 <strong>SMKN 13 Bandung</strong></div>
+              <div class="lks-meta-item">📅 <strong>13 Mei 2026</strong></div>
+              <div class="lks-meta-item">📋 <strong>No. 195/MKKSMK Kota Bandung/V/2026</strong></div>
+              <div class="lks-meta-item">📍 <strong>Kota Bandung, 11–13 Mei 2026</strong></div>
             </div>
 
           </div>
 
           <!-- RIGHT: Certificate image viewer -->
-          <div class="hl-cert-section">
-            <div class="hl-cert-viewer" onclick="openLightbox('lks')" title="Klik untuk perbesar sertifikat">
+          <div class="lks-cert-section">
+            <div class="lks-cert-viewer" onclick="openLightbox()" title="Klik untuk perbesar sertifikat">
               <img
                 src="assets/lks-certificate.jpg"
                 alt="Sertifikat LKS Nasional Tingkat Kota Bandung 2026 — Raden Diazka Adhitya Budiman"
                 loading="lazy"
               />
-              <div class="hl-cert-overlay">
-                <span class="hl-cert-zoom-hint">🔍 Perbesar</span>
+              <div class="lks-cert-overlay">
+                <span class="lks-cert-zoom-hint">🔍 Perbesar</span>
               </div>
             </div>
-            <a class="hl-pdf-btn"
-               href="assets/lks-certificate.jpg"
-               target="_blank"
-               rel="noopener"
-               download>
-              📄 Unduh Sertifikat
-            </a>
-            <div class="hl-cert-label">Sertifikat Resmi — klik untuk perbesar</div>
+            <div class="lks-cert-label">📜 Sertifikat Resmi — klik untuk perbesar</div>
           </div>
 
+        </div>
+      </div>
+
+      <!-- Lightbox -->
+      <div class="lks-lightbox" id="lks-lightbox" onclick="closeLightboxBg(event)">
+        <div class="lks-lightbox-wrap">
+          <div class="lks-lightbox-close" onclick="closeLightbox()" title="Tutup">✕</div>
+          <img
+            class="lks-lightbox-img"
+            src="assets/lks-certificate.jpg"
+            alt="Sertifikat LKS Nasional Tingkat Kota Bandung 2026"
+          />
+          <div class="lks-lightbox-caption">
+            Sertifikat LKS Nasional Tingkat Kota Bandung 2026 · Raden Diazka Adhitya Budiman · No. 195/MKKSMK Kota Bandung/V/2026
+          </div>
         </div>
       </div>
 
@@ -783,100 +896,83 @@
       ============================================= -->
       <div class="section-label reveal" style="margin-top:0.5rem;">✦ Sertifikasi Profesional</div>
 
-      <div class="hl-card profcert-card reveal reveal-d1">
-        <div class="hl-inner">
+      <div class="profcert-highlight reveal reveal-d1">
+        <div class="profcert-inner">
 
           <!-- LEFT: Info -->
-          <div class="hl-left">
+          <div class="profcert-left">
 
-            <div class="hl-badge-row">
-              <span class="hl-badge hl-badge-green">🛡️ Fortinet NSE 1</span>
-              <span class="hl-badge hl-badge-blue">✓ Valid s.d. 2028</span>
+            <div class="profcert-badge-row">
+              <span class="profcert-badge profcert-badge-green">🛡️ Fortinet NSE 1</span>
+              <span class="profcert-badge profcert-badge-blue">✓ Valid s.d. 2028</span>
             </div>
 
-            <div class="hl-rank-row">
-              <div class="hl-medal">
-                <!-- Shield SVG -->
-                <svg viewBox="0 0 24 24" fill="none" xmlns="http://www.w3.org/2000/svg">
-                  <path d="M12 2L4 5v6c0 5.5 3.8 10.7 8 12 4.2-1.3 8-6.5 8-12V5l-8-3z" fill="url(#shieldGrad)" stroke="#22c55e" stroke-width="0.5" stroke-linejoin="round"/>
-                  <path d="M9 12l2 2 4-4" stroke="#04140c" stroke-width="2" stroke-linecap="round" stroke-linejoin="round"/>
-                  <defs>
-                    <linearGradient id="shieldGrad" x1="0" y1="0" x2="24" y2="24">
-                      <stop offset="0%" stop-color="#4ade80"/>
-                      <stop offset="100%" stop-color="#22c55e"/>
-                    </linearGradient>
-                  </defs>
-                </svg>
-              </div>
-              <div class="hl-rank">NSE 1</div>
-              <div class="hl-rank-desc">
-                <div class="hl-rank-event">Fortinet NSE 1 Certified in Cybersecurity<br>Tingkat Dasar</div>
-                <div class="hl-rank-org">Fortinet · Network Security Expert Track</div>
+            <div class="profcert-rank-row">
+              <div class="profcert-medal">🛡️</div>
+              <div class="profcert-rank">NSE 1</div>
+              <div class="profcert-rank-desc">
+                <div class="profcert-rank-event">Fortinet NSE 1 Certified in Cybersecurity<br>Tingkat Dasar</div>
+                <div class="profcert-rank-org">Fortinet · Network Security Expert Track</div>
               </div>
             </div>
 
-            <div class="hl-title">
+            <div class="profcert-title">
               Certified in Cybersecurity
-              <span>(Cybersecurity Fundamentals)</span>
+              <span>&nbsp;(Cybersecurity Fundamentals)</span>
             </div>
 
-            <div class="hl-meta-grid">
-              <div class="hl-meta-item">
-                <svg viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2"><path d="M20 21v-2a4 4 0 0 0-4-4H8a4 4 0 0 0-4 4v2"/><circle cx="12" cy="7" r="4"/></svg>
-                <strong>Raden Diazka Adhitya Budiman</strong>
-              </div>
-              <div class="hl-meta-item">
-                <svg viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2"><rect x="3" y="4" width="18" height="18" rx="2"/><path d="M16 2v4M8 2v4M3 10h18"/></svg>
-                <strong>14 Oktober 2026</strong>
-              </div>
-              <div class="hl-meta-item">
-                <svg viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2"><circle cx="12" cy="12" r="10"/><path d="M12 6v6l4 2"/></svg>
-                <strong>Berlaku s.d. 14 Okt 2028</strong>
-              </div>
-              <div class="hl-meta-item">
-                <svg viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2"><path d="M14 2H6a2 2 0 0 0-2 2v16a2 2 0 0 0 2 2h12a2 2 0 0 0 2-2V8z"/><path d="M14 2v6h6M16 13H8M16 17H8M10 9H8"/></svg>
-                <strong>No. 3385602202RD</strong>
-              </div>
+            <div class="profcert-meta-grid">
+              <div class="profcert-meta-item">👤 <strong>Raden Diazka Adhitya Budiman</strong></div>
+              <div class="profcert-meta-item">📅 <strong>14 Oktober 2026</strong></div>
+              <div class="profcert-meta-item">⏳ <strong>Berlaku s.d. 14 Okt 2028</strong></div>
+            </div>
+
+            <!-- Copy-on-click cert ID chip -->
+            <div class="profcert-id-chip" onclick="copyCertId(this)" title="Klik untuk copy nomor sertifikat">
+              <span class="cert-id-label">📋 No. Sertifikat</span>
+              <span class="cert-id-code">3385602202RD</span>
+              <span class="cert-id-copied">✓ Disalin!</span>
             </div>
 
           </div>
 
-          <!-- RIGHT: Badge + PDF grouped -->
-          <div class="hl-cert-section">
-            <div class="hl-cert-viewer" onclick="openLightbox('fortinet')" title="Klik untuk perbesar badge">
+          <!-- RIGHT: Badge + PDF grouped together -->
+          <div class="profcert-cert-section">
+            <!-- Badge image (klik untuk buka PDF) -->
+            <a class="profcert-cert-viewer"
+               href="assets/fortinet-nse-1-certificate.pdf"
+               target="_blank"
+               rel="noopener"
+               title="Klik untuk lihat sertifikat PDF">
               <img
                 src="assets/fortinet-nse-1-badge.png"
                 alt="Fortinet NSE 1 Certified in Cybersecurity — Badge"
                 loading="lazy"
               />
-              <div class="hl-cert-overlay">
-                <span class="hl-cert-zoom-hint">🔍 Perbesar</span>
+              <div class="profcert-cert-overlay">
+                <span class="profcert-cert-zoom-hint">🔍 Perbesar</span>
               </div>
-            </div>
-            <a class="hl-pdf-btn"
+            </a>
+
+            <!-- Tombol PDF eksplisit -->
+            <a class="profcert-pdf-btn"
                href="assets/fortinet-nse-1-certificate.pdf"
                target="_blank"
                rel="noopener">
               📄 Lihat Sertifikat PDF
             </a>
-            <div class="hl-cert-label">Badge &amp; Sertifikat — klik untuk perbesar</div>
+
+            <div class="profcert-cert-label">Badge &amp; Sertifikat — klik untuk perbesar</div>
+
+            <!-- Verify link -->
             <a href="https://training.fortinet.com/admin/tool/certificate/index.php"
                target="_blank"
                rel="noopener"
-               class="hl-verify-link">
+               class="profcert-verify-link">
               🔗 Verifikasi via Fortinet Training
             </a>
           </div>
 
-        </div>
-      </div>
-
-      <!-- Lightbox -->
-      <div class="hl-lightbox" id="hl-lightbox" onclick="closeLightboxBg(event)">
-        <div class="hl-lightbox-wrap">
-          <div class="hl-lightbox-close" onclick="closeLightbox()" title="Tutup">✕</div>
-          <img class="hl-lightbox-img" id="hl-lightbox-img" src="" alt="Sertifikat" />
-          <div class="hl-lightbox-caption" id="hl-lightbox-caption"></div>
         </div>
       </div>
 
@@ -1001,41 +1097,18 @@
       });
     }
 
-    // Lightbox functions
-    const lightbox = document.getElementById('hl-lightbox');
-    const lightboxImg = document.getElementById('hl-lightbox-img');
-    const lightboxCaption = document.getElementById('hl-lightbox-caption');
-
-    const lightboxData = {
-      lks: {
-        src: 'assets/lks-certificate.jpg',
-        alt: 'Sertifikat LKS Nasional Tingkat Kota Bandung 2026',
-        caption: 'Sertifikat LKS Nasional Tingkat Kota Bandung 2026 · Raden Diazka Adhitya Budiman · No. 195/MKKSMK Kota Bandung/V/2026'
-      },
-      fortinet: {
-        src: 'assets/fortinet-nse-1-badge.png',
-        alt: 'Fortinet NSE 1 Certified in Cybersecurity — Badge',
-        caption: 'Fortinet NSE 1 Certified in Cybersecurity · Raden Diazka Adhitya Budiman · No. 3385602202RD'
-      }
-    };
-
-    function openLightbox(type) {
-      const data = lightboxData[type];
-      if (!data) return;
-      lightboxImg.src = data.src;
-      lightboxImg.alt = data.alt;
-      lightboxCaption.textContent = data.caption;
-      lightbox.classList.add('open');
+    function openLightbox() {
+      document.getElementById('lks-lightbox').classList.add('open');
       document.body.style.overflow = 'hidden';
     }
 
     function closeLightbox() {
-      lightbox.classList.remove('open');
+      document.getElementById('lks-lightbox').classList.remove('open');
       document.body.style.overflow = '';
     }
 
     function closeLightboxBg(e) {
-      if (e.target === lightbox) closeLightbox();
+      if (e.target === document.getElementById('lks-lightbox')) closeLightbox();
     }
 
     document.addEventListener('keydown', e => {
