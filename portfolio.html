@@ -1,0 +1,268 @@
+<!DOCTYPE html>
+<html lang="id">
+<head>
+  <meta charset="UTF-8" />
+  <meta name="viewport" content="width=device-width, initial-scale=1.0" />
+  <title>Portfolio — Diazka</title>
+  <link rel="icon" href="data:image/svg+xml,<svg xmlns='http://www.w3.org/2000/svg' viewBox='0 0 100 100'><rect width='100' height='100' rx='20' fill='%233b82f6'/><text y='72' x='50' text-anchor='middle' font-size='65' font-family='sans-serif' font-weight='bold' fill='white'>D</text></svg>">
+  <!-- Open Graph -->
+  <meta property="og:title" content="Portfolio — Raden Diazka Adhitya Budiman" />
+  <meta property="og:description" content="Kumpulan proyek, lab, dan dokumentasi networking yang pernah saya kerjakan." />
+  <meta property="og:type" content="website" />
+  <meta property="og:image" content="assets/foto.png" />
+  <link rel="stylesheet" href="css/style.css" />
+  <style>
+    .portfolio-grid {
+      display: grid;
+      grid-template-columns: repeat(auto-fill, minmax(260px, 1fr));
+      gap: 1.25rem;
+      margin-bottom: 3rem;
+    }
+
+    .project-card {
+      background: var(--surface);
+      border: 1px solid var(--border);
+      border-radius: var(--radius);
+      padding: 1.5rem;
+      display: flex;
+      flex-direction: column;
+      gap: 0.75rem;
+      transition: border-color var(--transition), transform var(--transition), box-shadow var(--transition);
+      position: relative;
+      overflow: hidden;
+    }
+
+    .project-card::before {
+      content: '';
+      position: absolute;
+      inset: 0;
+      background: radial-gradient(circle at var(--mx,50%) var(--my,50%), rgba(59,130,246,0.07), transparent 65%);
+      opacity: 0;
+      transition: opacity 0.3s ease;
+      pointer-events: none;
+    }
+
+    .project-card:hover::before { opacity: 1; }
+    .project-card:hover {
+      border-color: var(--accent);
+      transform: translateY(-4px);
+      box-shadow: 0 12px 32px rgba(0,0,0,0.2);
+    }
+
+    .project-icon { font-size: 1.75rem; line-height: 1; }
+    .project-title {
+      font-family: 'Syne', sans-serif;
+      font-size: 1rem;
+      font-weight: 700;
+      color: var(--text-main);
+    }
+
+    .project-desc {
+      font-size: 0.875rem;
+      color: var(--text-muted);
+      line-height: 1.7;
+      flex: 1;
+    }
+
+    .project-links { display: flex; gap: 0.6rem; flex-wrap: wrap; margin-top: 0.5rem; }
+
+    .project-link {
+      font-size: 0.8rem;
+      color: var(--accent);
+      border: 1px solid var(--accent-soft);
+      padding: 0.3rem 0.75rem;
+      border-radius: 6px;
+      transition: background var(--transition);
+    }
+
+    .project-link:hover { background: var(--accent-soft); color: var(--accent); }
+
+    /* Platform cards */
+    .platform-grid {
+      display: grid;
+      grid-template-columns: 1fr 1fr;
+      gap: 1.25rem;
+      margin-bottom: 3rem;
+    }
+
+    .platform-card {
+      background: var(--surface);
+      border: 1px solid var(--border);
+      border-radius: var(--radius);
+      padding: 1.75rem;
+      display: flex;
+      align-items: center;
+      gap: 1.25rem;
+      transition: border-color var(--transition), transform var(--transition);
+    }
+
+    .platform-card:hover { border-color: var(--accent); transform: translateY(-3px); }
+
+    .platform-icon { font-size: 2.5rem; flex-shrink: 0; }
+    .platform-name { font-family: 'Syne', sans-serif; font-weight: 700; font-size: 1rem; margin-bottom: 0.25rem; }
+    .platform-desc { font-size: 0.82rem; color: var(--text-muted); margin-bottom: 0.75rem; }
+
+    @media (max-width: 640px) { .platform-grid { grid-template-columns: 1fr; } }
+
+    /* Project preview image */
+    .project-preview {
+      width: 100%;
+      height: 140px;
+      border-radius: 8px;
+      overflow: hidden;
+      background: var(--bg);
+      border: 1px solid var(--border);
+      display: flex;
+      align-items: center;
+      justify-content: center;
+      margin-bottom: 0.25rem;
+      position: relative;
+    }
+
+    .project-preview img {
+      width: 100%;
+      height: 100%;
+      object-fit: cover;
+    }
+
+    .project-preview-placeholder {
+      display: flex;
+      flex-direction: column;
+      align-items: center;
+      justify-content: center;
+      gap: 0.5rem;
+      color: var(--text-muted);
+      font-size: 0.75rem;
+      text-align: center;
+      padding: 1rem;
+    }
+
+    .project-preview-placeholder .preview-icon { font-size: 2rem; opacity: 0.4; }
+    .project-preview-placeholder .preview-label { opacity: 0.5; font-family: "Syne", sans-serif; font-size: 0.7rem; letter-spacing: 0.05em; text-transform: uppercase; }
+  </style>
+</head>
+<body>
+
+  <nav class="navbar">
+    <a href="index.html" class="logo">DI<span>.</span></a>
+    <button class="hamburger" aria-label="Menu">
+      <span></span><span></span><span></span>
+    </button>
+    <div class="navbar-right">
+      <ul class="nav-links">
+        <li><a href="index.html">Home</a></li>
+        <li><a href="about.html">About</a></li>
+        <li><a href="portfolio.html">Portfolio</a></li>
+        <li><a href="certificates.html">Certificates</a></li>
+        <li><a href="contact.html">Contact</a></li>
+      </ul>
+      <button class="theme-toggle" id="theme-toggle" title="Toggle tema">☀️</button>
+    </div>
+  </nav>
+
+  <main>
+    <section class="section">
+
+      <span class="tag reveal">Portfolio</span>
+      <h1 class="section-title reveal reveal-d1" style="margin-top:1rem;">Proyek & Karya</h1>
+      <p class="section-sub reveal reveal-d2">Kumpulan proyek, lab, dan dokumentasi yang pernah saya kerjakan.</p>
+
+      <!-- Platform -->
+      <h2 class="reveal" style="margin-bottom:1rem; font-size:1.1rem; color:var(--text-muted);">Platform Saya</h2>
+      <div class="platform-grid">
+
+        <div class="platform-card reveal reveal-d1">
+          <div class="platform-icon">📝</div>
+          <div>
+            <div class="platform-name">Blog — Blogger</div>
+            <!-- ✏️ EDIT: Deskripsi blog kamu -->
+            <div class="platform-desc">Catatan belajar, tutorial jaringan, dan dokumentasi lab.</div>
+            <!-- ✏️ EDIT: Ganti href dengan URL Blogger kamu -->
+            <a href="https://diazkaa.blogspot.com/" target="_blank"
+               class="btn btn-outline" style="font-size:0.82rem; padding:0.4rem 1rem;">
+              Kunjungi Blog →
+            </a>
+          </div>
+        </div>
+
+        <div class="platform-card reveal reveal-d2">
+          <div class="platform-icon">🐙</div>
+          <div>
+            <div class="platform-name">GitHub</div>
+            <!-- ✏️ EDIT: Deskripsi GitHub -->
+            <div class="platform-desc">Repository kode, skrip, dan file konfigurasi proyek.</div>
+            <!-- ✏️ EDIT: Ganti href dengan URL GitHub kamu -->
+            <a href="https://github.com/raden-diazka/raden-diazka-introduction" target="_blank"
+               class="btn btn-outline" style="font-size:0.82rem; padding:0.4rem 1rem;">
+              Lihat GitHub →
+            </a>
+          </div>
+        </div>
+
+      </div>
+
+      <!-- Proyek pilihan -->
+      <h2 class="reveal" style="margin-bottom:1rem; font-size:1.1rem; color:var(--text-muted);">Proyek Pilihan</h2>
+      <div class="portfolio-grid">
+
+        <div class="project-card reveal reveal-d1">
+          <div class="project-preview">
+            <img src="assets/ss-asj.png" alt="Debian Server + Windows 7 Client - ASJ">
+          </div>
+          <div class="project-title">Administrasi Server Jaringan (ASJ)</div>
+          <div class="project-desc">
+            Konfigurasi Linux Debian sebagai server jaringan menggunakan VirtualBox,
+            mencakup instalasi, manajemen user, dan pengaturan layanan dasar.
+          </div>
+          <div class="project-links">
+            <span class="tag" style="font-size:0.7rem;">VirtualBox</span>
+            <span class="tag" style="font-size:0.7rem;">Linux</span>
+            <a href="https://diazkaa.blogspot.com/search/label/ASJ" target="_blank" class="project-link">Lihat di Blog →</a>
+          </div>
+        </div>
+
+        <div class="project-card reveal reveal-d2">
+          <div class="project-preview">
+            <img src="assets/ss-tjkn.png" alt="Topologi Cisco Packet Tracer - TJKN">
+          </div>
+          <div class="project-title">Teknik Jaringan Kabel dan Nirkabel</div>
+          <div class="project-desc">
+            Merancang dan mengimplementasikan topologi jaringan kabel & nirkabel, termasuk
+            pemasangan kabel Fiber Optic dan konfigurasi jaringan Wireless menggunakan
+            Cisco Packet Tracer & PNETLab.
+          </div>
+          <div class="project-links">
+            <span class="tag" style="font-size:0.7rem;">Cisco Packet Tracer</span>
+            <span class="tag" style="font-size:0.7rem;">PNETLab</span>
+            <a href="https://diazkaa.blogspot.com/search/label/FO-TJKN" target="_blank" class="project-link">Lihat di Blog →</a>
+          </div>
+        </div>
+
+        <div class="project-card reveal reveal-d3">
+          <div class="project-preview">
+            <img src="assets/ss-pnetlab.png" alt="PnetLab Topology MikroTik RouterOS">
+          </div>
+          <div class="project-title">Pemasangan dan Konfigurasi Perangkat Jaringan</div>
+          <div class="project-desc">
+            Melakukan konfigurasi perangkat jaringan via CLI MikroTik RouterOS, mencakup
+            pengaturan IP Address, DHCP Server, dan manajemen koneksi antar jaringan.
+          </div>
+          <div class="project-links">
+            <span class="tag" style="font-size:0.7rem;">MikroTik</span>
+            <span class="tag" style="font-size:0.7rem;">Networking</span>
+            <a href="https://diazkaa.blogspot.com/search/label/PKPJ" target="_blank" class="project-link">Lihat di Blog →</a>
+          </div>
+        </div>
+
+      </div>
+
+    </section>
+  </main>
+
+  <footer>
+    <p>© 2025 Raden Diazka Adhitya Budiman. Dibuat dengan HTML, CSS & JS.</p>
+  </footer>
+
+  <script src="js/main.js"></script>
+</body>
+</html>
