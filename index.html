@@ -88,10 +88,43 @@
       color: var(--text-muted);
       font-size: 1rem;
       max-width: 480px;
-      margin-bottom: 2rem;
+      margin-bottom: 1.5rem;
       line-height: 1.8;
       opacity: 0;
       animation: fadeUp 0.6s ease forwards 0.45s;
+    }
+
+    /* Status PKL */
+    .hero-status {
+      display: inline-flex;
+      align-items: center;
+      gap: 0.6rem;
+      background: var(--accent-soft);
+      border: 1px solid var(--accent);
+      color: var(--text-main);
+      border-radius: 999px;
+      padding: 0.4rem 1rem;
+      font-size: 0.82rem;
+      line-height: 1.4;
+      margin-bottom: 1.75rem;
+      opacity: 0;
+      animation: fadeUp 0.6s ease forwards 0.5s;
+    }
+
+    .status-dot {
+      width: 8px;
+      height: 8px;
+      border-radius: 50%;
+      background: #4ade80;
+      flex-shrink: 0;
+      box-shadow: 0 0 0 0 rgba(74,222,128,0.6);
+      animation: statusPulse 2s ease-in-out infinite;
+    }
+
+    @keyframes statusPulse {
+      0%   { box-shadow: 0 0 0 0 rgba(74,222,128,0.6); }
+      70%  { box-shadow: 0 0 0 8px rgba(74,222,128,0); }
+      100% { box-shadow: 0 0 0 0 rgba(74,222,128,0); }
     }
 
     .hero-cta {
@@ -168,6 +201,7 @@
     @media (max-width: 640px) {
       .hero { flex-direction: column-reverse; gap: 2rem; padding-top: 3rem; min-height: auto; }
       .avatar-wrapper { width: 150px; height: 150px; }
+      .hero-status { border-radius: 14px; }
     }
   </style>
 </head>
@@ -208,6 +242,16 @@
             Siswa <strong>Teknik Jaringan Komputer dan Telekomunikasi (TJKT)</strong>
             yang tertarik di bidang networking, konfigurasi jaringan, dan keamanan komputer.
           </p>
+
+          <!-- Status PKL -->
+          <div class="hero-status">
+            <span class="status-dot"></span>
+            <span>
+              Sedang PKL sebagai <strong>IT Support</strong> di
+              <strong>SBM, Institut Teknologi Bandung</strong>
+              <span style="color:var(--text-muted);">· Okt 2026 – Mar 2027</span>
+            </span>
+          </div>
 
           <div class="hero-cta">
             <a href="portfolio.html" class="btn btn-primary">Lihat Portfolio →</a>
